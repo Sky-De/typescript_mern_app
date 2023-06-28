@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.js";
-import bookRoutes from "./routes/book.js";
+import bookRoutes from "./routes/post.js";
 
 const app = express();
 env.config();
@@ -18,8 +18,8 @@ app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
 app.get("/", (req,res) =>  res.status(200).json("Welcome to my express server"));
 // AUTH
 app.use("/api/v1/auth", authRoutes);
-// BOOK
-app.use("/api/v1/book", bookRoutes);
+// POST
+app.use("/api/v1/post", bookRoutes);
    
 
 const PORT = process.env.PORT || 1313;
