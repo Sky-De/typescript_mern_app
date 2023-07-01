@@ -1,115 +1,99 @@
 import PostModel from "../models/postModel.js";
 import UserModel from "../models/userModel.js";
-import { hashPassword, mongooseIdValidator, tokenDecoder, tokenGenerator } from "../funcs/index.js";
- 
+import { 
+    CatchResponse, 
+    CreatedResponse, 
+    NotFoundResponse, 
+    SuccessResponse, 
+    mongooseIdValidator  
+} from "../funcs/index.js";
+   
+// -------------------------------------------------------------------------------------------------getPosts---- 
 export const getPosts = async (req, res) => {
     
     try {
         const posts = await PostModel.find();
-        res.status(200).json(posts);
+        SuccessResponse(res,posts)
         
     } catch (err) {
-        console.log(err);
-        res.status(400).json("SomeThing went wrong!");
+        CatchResponse(res,err)
     }
-}
+};
 
+// -------------------------------------------------------------------------------------------------getPost----
 export const getPost = async (req, res) => {
     const { id } = req.params;
-    if (!mongooseIdValidator(id)) return res.status(404).json({message:`No post with id: ${id}`});
+    if (!mongooseIdValidator(id)) return NotFoundResponse(res);
     
     try {
         const post = await PostModel.findById(id);
-        if(!post) return res.status(404).json({message:`No post with id: ${id}`});
-        res.status(200).json(post);
+        if(!post) return NotFoundResponse(res);
+        SuccessResponse(res,post)
         
     } catch (err) {
-        console.log(err);
-        res.status(400).json("SomeThing went wrong!");
+        CatchResponse(res,err)
     }
-}
+};
 
+// -------------------------------------------------------------------------------------------------getUserPosts----
 export const getUserPosts = async (req, res) => {
     
     try {
         const posts = await PostModel.find({ createdBy: req.userId });
-        res.status(200).json(posts);
+        SuccessResponse(res,posts)
         
     } catch (err) {
-        console.log(err);
-        res.status(400).json("SomeThing went wrong!");
+        CatchResponse(res,err)
     }
-}
+};
 
+// --------------------------------------------------------------------------------------------------createPost---
 export const createPost = async (req, res) => {
     const post = req.body;
     
     try {
         const newPost = new PostModel({ ...post, createdBy: req.userId });
         await newPost.save();
-        res.status(200).json(newPost);
+        CreatedResponse(res,newPost)
         
     } catch (err) {
-        console.log(err);
-        res.status(400).json("SomeThing went wrong!");
+        CatchResponse(res,err)
     }
-}
+};
 
+// --------------------------------------------------------------------------------------------------updatePost---
 export const updatePost = async (req, res) => {
     const newPost = req.body;
     const { id } = req.params;
-    if (!mongooseIdValidator(id)) return res.status(404).json({message:`No post with id: ${id}`});
+    if (!mongooseIdValidator(id)) return NotFoundResponse(res);
 
     
     try {
         const updatedPost = await PostModel.findByIdAndUpdate(id,{...newPost,id},{new: true});
-        res.status(200).json(updatedPost);
+        CreatedResponse(res,updatedPost);
         
     } catch (err) {
-        console.log(err);
-        res.status(400).json("SomeThing went wrong!");
+        CatchResponse(res,err)
     }
-}
+};
 
+// --------------------------------------------------------------------------------------------------deletePost---
 export const deletePost = async (req, res) => {
     const { id } = req.params;
-    if(!mongooseIdValidator(id)) return res.status(404).json({message:`No post with id: ${id}`});
+    if(!mongooseIdValidator(id)) return NotFoundResponse(res);
     try {
         const postExist = await PostModel.findById(id);
-        if(!postExist) return res.status(404).json({message: `No post with id: ${id}`});
+        if(!postExist) return NotFoundResponse(res);
         await PostModel.findByIdAndRemove(id);
-        console.log("DONE DELETE");
-        res.json({message:`Post with id ${id} deleted!`});
+        SuccessResponse(res,{message:`Post with id ${id} deleted!`});
         
     } catch (err) {
-        console.log(err);
-        res.status(400).json("SomeThing went wrong!");
+        CatchResponse(res,err)
     }
-}
+};
 
 
-
-export const test = async (req, res) => {
-    const token = tokenGenerator({isAdmin:true,id:"12332443556"});
-    const pass = hashPassword("123");
-    const decodedToken = tokenDecoder(token);
-    const isIdValid = mongooseIdValidator('649b63dd94136ed7069617');
-    
-    // console.log(token);
-    // console.log(pass);
-    // console.log(decodedToken);
-    console.log(isIdValid);
-    
-    try {
-        res.json("DONEEE");
-    } catch (err) {
-        console.log(err);
-        res.status(400).json("SomeThing went wrong!");
-    }
-}
-
-
-
+// -------------------------------------------------------------------------------------------------getUserBookMarks----
 export const getUserBookMarks = async (req, res) => {
   
     try {
@@ -117,34 +101,20 @@ export const getUserBookMarks = async (req, res) => {
         
         const bookMarkPosts = await PostModel.find({'_id': { $in: bookMarks } });
     
-        res.status(200).json(bookMarkPosts);
+        SuccessResponse(res,bookMarkPosts)
     } catch (err) {
-        console.log(err);
-        res.status(400).json(err);
+        CatchResponse(res,err);
     }
-}
+};
 
 
-export const bookMarkPost = async (req, res) => {
-    const { id } = req.params;
-    const { userId } = req;
-    
-    if(!mongooseIdValidator(id)) return res.status(404).json({message:`No post with id: ${id}`});
-    // FIX
-    try {
-        const updatedUser = await UserModel.findByIdUpdate(userId, { $push: { bookMarks: id } },{ new: true});
-        res.status(200).json(updatedUser);
-    } catch (err) {
-        console.log(err);
-        res.status(400).json(err);
-    }
-}
 
 
+// -------------------------------------------------------------------------------------------------likePost----
 export const likePost = async (req,res) => {
     const { id } = req.params;
     const { userId } = req;
-    if(!mongooseIdValidator(id)) return res.status(404).json({message:`No post with id: ${id}`});
+    if(!mongooseIdValidator(id)) return NotFoundResponse(res);
 
     try {
         const post = await PostModel.findById(id);
@@ -154,12 +124,10 @@ export const likePost = async (req,res) => {
         }else{
             post.likes = post.likes.filter((id) => id !== String(userId));
         }
-
         const updatedPost = await PostModel.findByIdAndUpdate(id,post,{new:true});
-        res.status(201).json(updatedPost);
+        CreatedResponse(res,updatedPost)
 
     } catch (err) {
-        console.log(err);
-        res.status(400).json(err);
+        CatchResponse(res,err);
     }
-}
+};

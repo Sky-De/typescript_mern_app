@@ -1,44 +1,67 @@
 import PostModel from "../models/postModel.js";
-import { mongooseIdValidator, tokenDecoder } from "../funcs/index.js";
+import { 
+    CatchResponse, 
+    ExpiredTokenResponse, 
+    ForbiddenResponse, 
+    NotFoundResponse, 
+    mongooseIdValidator, 
+    tokenDecoder 
+} from "../funcs/index.js";
 
-// better logic here --FIX
+// -------------------------------------------------------------------------userAuth-----
 export const userAuth = (req,res,next) => {
     const { access_token } = req.cookies;
 
-    if(!access_token) return res.status(401).json("You are not allowed!");
+    if(!access_token) return ForbiddenResponse(res);
     const decodedData = tokenDecoder(access_token);
-    if(decodedData === "EXPIRED") return res.status(405).json("Token is expired!");
+    if(decodedData === "EXPIRED") return ExpiredTokenResponse(res);
 
 
-    if(!mongooseIdValidator(decodedData.id)) return res.status(401).json("You are not allowed!");
+    if(!mongooseIdValidator(decodedData.id)) return ForbiddenResponse(res);
     req.userId = decodedData.id;
     next();
 }
 
-// better logic here --FIX
+// --------------------------------------------------------------------------postOwnerAuth----
 export const postOwnerAuth = async (req,res,next) => {
     const { access_token } = req.cookies;
     const { id } = req.params;
 
-    if(!access_token) return res.status(401).json("You are not allowed!1");
+    if(!access_token) return ForbiddenResponse(res);
     const decodedData = tokenDecoder(access_token);
-    if(decodedData === "EXPIRED") return res.status(405).json("Token is expired!");
-    if(!mongooseIdValidator(decodedData.id)) return res.status(401).json("You are not allowed!");
-    if(!mongooseIdValidator(id)) return res.status(401).json("No post with this ID!");
+    if(decodedData === "EXPIRED") return ExpiredTokenResponse(res);
+    if(!mongooseIdValidator(decodedData.id)) return ForbiddenResponse(res);
+    if(!mongooseIdValidator(id)) return NotFoundResponse(res);
     
     // full access for ADMIN
     if(decodedData.isAdmin) return next();
 
     try {
         const post = await PostModel.findById(id);
-        if(!post) return res.status(404).json("There is no post with this ID!");
-        if(post.createdBy !== decodedData.id) return res.status(405).json("You are not allowed!3");
+        if(!post) return NotFoundResponse(res);
+        if(post.createdBy !== decodedData.id) return ForbiddenResponse(res);
         req.userId = decodedData.id;
         next();
 
-    } catch (error) {
-        console.log(error);
-        return res.status(400).json("Something went wrong!1");
+    } catch (err) {
+        return CatchResponse(res,err);
     }
 
 }
+
+
+// --------------------------------------------------------------------------userOwnerAuth----
+export const userOwnerAuth = (req,res,next) => {
+    const { access_token } = req.cookies;
+
+    if(!access_token) return ForbiddenResponse(res);
+    const decodedData = tokenDecoder(access_token);
+    if(decodedData === "EXPIRED") return ExpiredTokenResponse(res);
+    if(!mongooseIdValidator(decodedData.id)) return ForbiddenResponse(res);
+    
+    req.userId = decodedData.id;
+    if(req.userId) return next();
+    else return ForbiddenResponse(res);
+}
+
+
