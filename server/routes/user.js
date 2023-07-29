@@ -6,6 +6,7 @@ import {
     deleteUser, 
     getUsers, 
     loginUser, 
+    logoutUser, 
     registerUser, 
     updateUser, 
     updateUserPassword
@@ -20,11 +21,12 @@ router.get("/users", adminAuth, getUsers);
 // AUTH
 router.post("/register", registerUser);
 router.post("/login", loginUser);
+router.post("/logout", logoutUser);
 
 // ACTIONS
-router.patch("/update", userOwnerAuth, updateUser);
-router.patch("/update/password", userOwnerAuth, updateUserPassword);
-router.delete("/delete", userOwnerAuth, deleteUser);
+router.put("/:id/update", userOwnerAuth, updateUser);
+router.patch("/:id/update/password", userOwnerAuth, updateUserPassword);
+router.delete("/:id/delete", userOwnerAuth, deleteUser);
 router.patch("/:id/bookmark", userAuth ,bookMarkPost);
 
 export default router;

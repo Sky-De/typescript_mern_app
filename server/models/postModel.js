@@ -7,7 +7,10 @@ const postSchema = new Schema({
     desc: { type: String },
     coverUrl: { type: String},
     likes: {type: [String], default: []},
-    createdBy: { type: String},
+    createdBy: {
+    name: { type: String },
+    _id: { type: String },
+    },
     id: { type: String}
 },{ timestamps: true })
 

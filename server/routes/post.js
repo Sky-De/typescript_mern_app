@@ -8,20 +8,22 @@ import {
   getPosts, 
   getUserPosts, 
   updatePost, 
-  likePost  
+  likePost,
+  getPostsByCount
  } from "../controllers/post.js";
 
 
 const router = Router();
 
 router.get("/posts",  getPosts);
+router.post("/posts/counted",  getPostsByCount);
 
-router.get("/user/posts", userAuth, getUserPosts);
-router.get("/user/bookmarks", userAuth ,getUserBookMarks);
+router.post("/user/posts", userAuth, getUserPosts);
+router.post("/user/bookmarks", userAuth ,getUserBookMarks);
 
 router.post("/create", userAuth, createPost);
 router.patch("/:id/like", userAuth, likePost);
-router.get("/:id", getPost);
+router.get("/:id",userAuth, getPost);
 
 router.patch("/:id/update", postOwnerAuth, updatePost);
 router.delete("/:id/delete", postOwnerAuth, deletePost);

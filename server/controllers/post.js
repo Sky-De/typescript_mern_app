@@ -1,71 +1,142 @@
 import PostModel from "../models/postModel.js";
 import UserModel from "../models/userModel.js";
 import { 
-    CatchResponse, 
     CreatedResponse, 
-    NotFoundResponse, 
     SuccessResponse, 
     mongooseIdValidator  
 } from "../funcs/index.js";
    
 // -------------------------------------------------------------------------------------------------getPosts---- 
-export const getPosts = async (req, res) => {
+//@desc gets all post 
+//@route GET /api/v1/post/posts
+//@access public
+
+export const getPosts = async (req, res, next) => {
     
     try {
-        const posts = await PostModel.find();
+        const posts = await PostModel.find().sort({ createdAt:-1 });
         SuccessResponse(res,posts)
         
     } catch (err) {
-        CatchResponse(res,err)
+        res.status(500);
+        return next(new Error("Some thing went wrong at gerPosts catch block"));
+    }
+};
+
+// -------------------------------------------------------------------------------------------------getPostsByCount---- 
+//@desc gets posts by postPerPage and currentPage
+//@route GET /api/v1/post/posts/counted
+//@access public
+
+export const getPostsByCount = async (req, res, next) => {
+
+    const { postPerPage=10 , currentPage=1 } = req.body;
+
+    try {
+        const allCount = await PostModel.count();
+
+        if(allCount <= postPerPage) {
+           const posts = await PostModel.find().sort({ createdAt:-1 });
+           return SuccessResponse(res, { allCount, posts });
+        }
+
+        const posts = await PostModel
+        .find().skip((currentPage * postPerPage) - postPerPage)
+        .limit(postPerPage)
+        .sort({ createdAt:-1 });
+
+        SuccessResponse(res, { allCount, posts });
+    
+    } catch (err) {
+        res.status(500);
+        return next(new Error("Some thing went wrong at getPostsByCount catch block"));
     }
 };
 
 // -------------------------------------------------------------------------------------------------getPost----
-export const getPost = async (req, res) => {
+//@desc gets only one post by ID
+//@route GET /api/v1/post/:id
+//@access user - admin
+
+export const getPost = async (req, res, next) => {
     const { id } = req.params;
-    if (!mongooseIdValidator(id)) return NotFoundResponse(res);
+    if (!mongooseIdValidator(id)) {
+        res.status(404);
+        return next(new Error("Post not found"));
+    };
     
     try {
         const post = await PostModel.findById(id);
-        if(!post) return NotFoundResponse(res);
-        SuccessResponse(res,post)
+        if(!post) {
+            res.status(404);
+            return next(new Error("Post not found"))
+        }
+        SuccessResponse(res,post);
         
     } catch (err) {
-        CatchResponse(res,err)
+        res.status(500);
+        return next(new Error("Some thing went wrong at getPost catch block"));
     }
 };
 
 // -------------------------------------------------------------------------------------------------getUserPosts----
-export const getUserPosts = async (req, res) => {
+//@desc gets all posts of user
+//@route GET /api/v1/post/:id
+//@access user - admin
+export const getUserPosts = async (req, res, next) => {
+    const { currentPage=1, postPerPage=10 } = req.body;
     
     try {
-        const posts = await PostModel.find({ createdBy: req.userId });
-        SuccessResponse(res,posts)
+        const allCount = await PostModel.find({ "createdBy._id": req.userId }).count();
+        if(allCount <= postPerPage) {
+           const userPosts = await PostModel.find({ "createdBy._id": req.userId }).sort({ createdAt:-1 });
+           return SuccessResponse(res, { allCount, userPosts });
+        }
+        const userPosts = await PostModel
+        .find({ "createdBy._id": req.userId })
+        .skip((currentPage * postPerPage) - postPerPage)
+        .limit(postPerPage)
+        .sort({ createdAt:-1 });
+        SuccessResponse(res,{ allCount, userPosts });
         
     } catch (err) {
-        CatchResponse(res,err)
+        res.status(500);
+        return next(new Error("Some thing went wrong at getUserPosts catch block"));
     }
 };
 
 // --------------------------------------------------------------------------------------------------createPost---
-export const createPost = async (req, res) => {
+//@desc create new post 
+//@route POST /api/v1/post/create
+//@access user 
+
+export const createPost = async (req, res, next) => {
     const post = req.body;
     
     try {
-        const newPost = new PostModel({ ...post, createdBy: req.userId });
+        const newPost = new PostModel({ ...post, createdBy: { _id: req.userId, name: req.userName } });
         await newPost.save();
         CreatedResponse(res,newPost)
         
     } catch (err) {
-        CatchResponse(res,err)
+        res.status(500);
+        return next(new Error("Some thing went wrong at createPost catch block"));
     }
 };
 
+
 // --------------------------------------------------------------------------------------------------updatePost---
-export const updatePost = async (req, res) => {
+//@desc updates post 
+//@route POST /api/v1/post/:id/update
+//@access user
+
+export const updatePost = async (req, res, next) => {
     const newPost = req.body;
     const { id } = req.params;
-    if (!mongooseIdValidator(id)) return NotFoundResponse(res);
+    if (!mongooseIdValidator(id)) {
+        res.status(400);
+        return next(new Error("Not valid moongoId"));
+    }
 
     
     try {
@@ -73,37 +144,66 @@ export const updatePost = async (req, res) => {
         CreatedResponse(res,updatedPost);
         
     } catch (err) {
-        CatchResponse(res,err)
+        res.status(500);
+        return next(new Error("Some thing went wrong at updatePost catch block"));
     }
 };
 
 // --------------------------------------------------------------------------------------------------deletePost---
-export const deletePost = async (req, res) => {
+//@desc deletes post
+//@route POST /api/v1/post/:id/delete
+//@access user - admin
+
+export const deletePost = async (req, res, next) => {
     const { id } = req.params;
-    if(!mongooseIdValidator(id)) return NotFoundResponse(res);
+    if(!mongooseIdValidator(id)) {
+        res.status(400);
+        return next(new Error("Not valid moongoId"));
+    }
     try {
         const postExist = await PostModel.findById(id);
-        if(!postExist) return NotFoundResponse(res);
+        if(!postExist) {
+            res.status(404);
+            return next(new Error("Post not found"));
+        }
         await PostModel.findByIdAndRemove(id);
-        SuccessResponse(res,{message:`Post with id ${id} deleted!`});
+        SuccessResponse(res,{ deleted:true, _id: id });
         
     } catch (err) {
-        CatchResponse(res,err)
+        res.status(500);
+        return next(new Error("Some thing went wrong at deletePost catch block"));
     }
 };
 
 
 // -------------------------------------------------------------------------------------------------getUserBookMarks----
-export const getUserBookMarks = async (req, res) => {
+//@desc gets posts which are user's bookmarks
+//@route POST /api/v1/post/user/bookmarks
+//@access user
+
+export const getUserBookMarks = async (req, res, next) => {
+    const { postPerPage=10 , currentPage=1 } = req.body;
   
     try {
         const { bookMarks } = await UserModel.findById(req.userId);
-        
-        const bookMarkPosts = await PostModel.find({'_id': { $in: bookMarks } });
+
+        const allCount = await PostModel.find({'_id': { $in: bookMarks } }).count();
+        if(allCount <= postPerPage) {
+           const bookMarkPosts = await PostModel.find({'_id': { $in: bookMarks } }).sort({ createdAt:-1 });
+           return SuccessResponse(res, { allCount, bookMarkPosts });
+        }
+
+        const bookMarkPosts = await PostModel
+        .find({'_id': { $in: bookMarks } })
+        .skip((currentPage * postPerPage) - postPerPage)
+        .limit(postPerPage)
+        .sort({ createdAt:-1 });
+
     
-        SuccessResponse(res,bookMarkPosts)
+        SuccessResponse(res,{ allCount ,bookMarkPosts });
     } catch (err) {
-        CatchResponse(res,err);
+        res.status(500);
+        return next(new Error("Some thing went wrong at getUserBookMarks catch block"));
     }
 };
 
@@ -111,10 +211,17 @@ export const getUserBookMarks = async (req, res) => {
 
 
 // -------------------------------------------------------------------------------------------------likePost----
+//@desc likes or removed like of post
+//@route POST /api/v1/post/:id/like
+//@access user
+
 export const likePost = async (req,res) => {
     const { id } = req.params;
     const { userId } = req;
-    if(!mongooseIdValidator(id)) return NotFoundResponse(res);
+    if(!mongooseIdValidator(id)) {
+        res.status(400);
+        return next(new Error("Not valid moongoId"));
+    }
 
     try {
         const post = await PostModel.findById(id);
@@ -125,9 +232,10 @@ export const likePost = async (req,res) => {
             post.likes = post.likes.filter((id) => id !== String(userId));
         }
         const updatedPost = await PostModel.findByIdAndUpdate(id,post,{new:true});
-        CreatedResponse(res,updatedPost)
+        CreatedResponse(res,updatedPost.likes);
 
     } catch (err) {
-        CatchResponse(res,err);
+        res.status(500);
+        return next(new Error("Some thing went wrong at likePost catch block"));
     }
 };

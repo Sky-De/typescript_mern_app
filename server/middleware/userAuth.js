@@ -1,9 +1,11 @@
 import PostModel from "../models/postModel.js";
+import UserModel from "../models/userModel.js";
 import { 
     CatchResponse, 
     ExpiredTokenResponse, 
     ForbiddenResponse, 
     NotFoundResponse, 
+    SuccessResponse, 
     mongooseIdValidator, 
     tokenDecoder 
 } from "../funcs/index.js";
@@ -19,6 +21,7 @@ export const userAuth = (req,res,next) => {
 
     if(!mongooseIdValidator(decodedData.id)) return ForbiddenResponse(res);
     req.userId = decodedData.id;
+    req.userName = decodedData.name;
     next();
 }
 
@@ -30,7 +33,7 @@ export const postOwnerAuth = async (req,res,next) => {
     if(!access_token) return ForbiddenResponse(res);
     const decodedData = tokenDecoder(access_token);
     if(decodedData === "EXPIRED") return ExpiredTokenResponse(res);
-    if(!mongooseIdValidator(decodedData.id)) return ForbiddenResponse(res);
+    if(!mongooseIdValidator(decodedData.id)) return NotFoundResponse(res);
     if(!mongooseIdValidator(id)) return NotFoundResponse(res);
     
     // full access for ADMIN
@@ -39,8 +42,9 @@ export const postOwnerAuth = async (req,res,next) => {
     try {
         const post = await PostModel.findById(id);
         if(!post) return NotFoundResponse(res);
-        if(post.createdBy !== decodedData.id) return ForbiddenResponse(res);
+        if(post.createdBy._id !== decodedData.id) return ForbiddenResponse(res);
         req.userId = decodedData.id;
+        req.userName = decodedData.name;
         next();
 
     } catch (err) {
@@ -51,17 +55,40 @@ export const postOwnerAuth = async (req,res,next) => {
 
 
 // --------------------------------------------------------------------------userOwnerAuth----
-export const userOwnerAuth = (req,res,next) => {
+export const userOwnerAuth = async (req,res,next) => {
     const { access_token } = req.cookies;
+    const { id } = req.params;
 
     if(!access_token) return ForbiddenResponse(res);
     const decodedData = tokenDecoder(access_token);
     if(decodedData === "EXPIRED") return ExpiredTokenResponse(res);
     if(!mongooseIdValidator(decodedData.id)) return ForbiddenResponse(res);
     
-    req.userId = decodedData.id;
+    try {
+        const user = await UserModels.findById(decodedData.id);
+        if(!user) {
+            res.staus(404);
+            return next(new Error("User not found"));
+        }
+        
+        if( decodedData.id === id || user.isAdmin ){ 
+            req.userId = id;
+        }
+        else{
+            res.status(403);
+            return next(new Error("You are not allowed for this action")); 
+        }
+            
+    } catch (error) {
+        res.status(500);
+        return next(new Error("Some thing went wrong on userOwnerAuth catch block"));
+    }
+    
     if(req.userId) return next();
-    else return ForbiddenResponse(res);
+    else {
+        res.status(403);
+        return next(new Error("You are not allowed for this action"));
+    }
 }
 
 

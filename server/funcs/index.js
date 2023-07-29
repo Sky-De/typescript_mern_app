@@ -21,13 +21,6 @@ export const hashPassword = (password) => bcrypt.hashSync(password, bcrypt.genSa
 // Takes ID and checks if it is valid or not then returns Boolean 
 export const mongooseIdValidator = (id) =>  mongoose.Types.ObjectId.isValid(id);
 
-// FIX-remove this before deploy
-export const resError = (status,message,err,res) => {
-    return res.status(status).json({err,message})
-}
-
-
-
 // ERR RESPONSES
 export const ExpiredTokenResponse = (res) => res.status(403).json({message:"Your are not allowed (Token Is Expired) !"});
 export const ForbiddenResponse = (res) => res.status(403).json({message:"Your are not allowed!"});
@@ -36,7 +29,7 @@ export const NotFoundResponse = (res,err={}) => res.status(404).json({err,messag
 
 export const CatchResponse = (res,err={}) => {
     console.log(err);
-    return res.status(400).json({err,message:"Something went wrong in TryCatch block"});
+    return res.status(500).json({err,message:"Server Error"});
 }
 
 // SUCCESS RESPONSES
