@@ -65,7 +65,7 @@ const PostForm: React.FC<{ isUpdate: boolean }> = ({ isUpdate }) => {
 
   useEffect(() => {
     setFormData({ ...formData, coverUrl: uploadImageUrl });
-  }, [uploadImageUrl, formData]);
+  }, [uploadImageUrl]);
   // last formData
 
   useEffect(() => {

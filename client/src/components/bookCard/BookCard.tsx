@@ -60,7 +60,7 @@ const BookCard: FC<BookCardProps> = (props) => {
       if (createdBy) {
         try {
           const { data } = await axios.get(
-            `http://localhost:2323/api/v1/user/${createdBy}/name`
+            `https://puce-worried-barnacle.cyclic.app/api/v1/user/${createdBy}/name`
           );
           setCreatorInfo({ name: data.name, imgUrl: data.imgUrl });
         } catch (error) {
