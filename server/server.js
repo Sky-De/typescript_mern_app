@@ -16,7 +16,7 @@ app.use(
     origin: true,
     credentials: true,
     sameSite: "none",
-    secure: true,
+    // secure: true,
   })
 );
 app.use(cookieParser());
