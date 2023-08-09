@@ -1,0 +1,46 @@
+@import "../../utilities";
+.profile {
+  max-width: $content-max-width;
+  margin: auto;
+
+  &__intro {
+    @include flex-end-center-row;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+    width: 100%;
+    p {
+      text-transform: capitalize;
+    }
+  }
+
+  &__intro--userAction {
+    @include flex-end-center-row;
+    gap: 1rem;
+    width: 100%;
+    p {
+      text-transform: capitalize;
+    }
+  }
+
+  &__tabs {
+    padding-left: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    gap: 2rem;
+    border-bottom: 2px solid var(--text-secondary);
+    span {
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+
+    .active {
+      font-weight: bold;
+      color: var(--text-primary);
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { constants } from "../constants.js";
 
-export default function errorHandler(err, req, res, next){
+export default function errorHandler(err, req, res, next) {
   const statusCode = res.statusCode ? res.statusCode : 500;
 
   switch (statusCode) {
@@ -39,5 +39,4 @@ export default function errorHandler(err, req, res, next){
       console.log("No Error, All good !");
       break;
   }
-  
-};
+}

@@ -1,0 +1,15 @@
+@import "../../utilities";
+.footer {
+  z-index: 4;
+  min-height: $footer-hight-mobile;
+  max-height: $footer-hight-mobile;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  box-shadow: 0px 0px 20px -15px var(--text-primary);
+  @include flex-center-row;
+  gap: 0.75rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}

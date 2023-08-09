@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import { useAppSelectore } from "./hooks/reduxHooks";
+import Home from "./pages/Home/Home";
+import Profile from "./pages/Profile/Profile";
+import Header from "./layout/header/Header";
+import Footer from "./layout/footer/Footer";
+import Model from "./components/models/Model";
+import NewPostBtn from "./components/buttons/NewPostBtn";
+import ProfileSetting from "./pages/Profile/profileSetting/ProfileSetting";
+import Nav from "./layout/nav/Nav";
+import Alert from "./components/alert/Alert";
+import NotFound from "./components/Error/NotFound";
+import "./App.scss";
 
-function App() {
+const App: React.FC = () => {
+  const { isDark } = useAppSelectore((state) => state.theme);
+  const { isOpen: modelIsOpen } = useAppSelectore((state) => state.model);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div role="application" className={`App ${isDark ? "dark" : ""}`}>
+      <Header />
+      <Alert />
+      <Nav />
+      {modelIsOpen && <Model />}
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/setting" element={<ProfileSetting />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+
+      <NewPostBtn />
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;

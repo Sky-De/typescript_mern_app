@@ -1,0 +1,37 @@
+@import "../../utilities";
+.header {
+  position: sticky;
+  z-index: 6;
+  top: 0;
+  box-shadow: 0px 0px 30px -20px var(--text-primary);
+  min-height: $header-hight-mobile;
+  max-height: $header-hight-mobile;
+  background: var(--bg-primary);
+  @include flex-center-row;
+  @include respond-to(xl) {
+    height: $header-hight-desktop;
+  }
+
+  &__content {
+    @include flex-between-center-row;
+    @include content-max-width;
+    padding: 0 1rem;
+  }
+
+  &__logo {
+    @include flex-center-row;
+    span {
+      font-weight: bold;
+    }
+    @media (hover: hover) {
+      opacity: 0.5;
+      cursor: pointer;
+    }
+  }
+
+  &__actions {
+    i {
+      margin-left: 1rem;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@import "../../utilities";
+.list {
+  @include flex-align-center-column;
+  @include content-max-width;
+  gap: 1rem;
+  list-style-type: none;
+  margin-top: 1rem;
+  @include respond-to(sm) {
+    margin-top: 2rem;
+  }
+
+  @include respond-to(lg) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

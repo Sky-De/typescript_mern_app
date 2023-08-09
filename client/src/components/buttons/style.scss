@@ -1,0 +1,164 @@
+@import "../../utilities";
+
+.btn {
+  cursor: pointer;
+  border: none;
+  background: none;
+  i {
+    @include body-size;
+    @include sub-heading-size;
+    color: var(--text-primary);
+    padding: 0.5rem;
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  & i:active {
+    background: var(--bg-secondary);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+}
+
+// ---------------------------------------------------------
+.profileBtn {
+  .bxs-user-account {
+    color: var(--info);
+  }
+  .bxs-user-account.disable {
+    color: var(--disable);
+  }
+}
+// ---------------------------------------------------------
+.settingBtn {
+  i {
+    padding: 0.5rem;
+  }
+  & i:active {
+    background: var(--bg-primary);
+    @include border-radius-rounded;
+  }
+}
+
+// ---------------------------------------------------------
+.themeModeBtn {
+}
+// ---------------------------------------------------------
+.logoBtn {
+  h1 {
+    font-weight: bold;
+    color: var(--text-primary);
+    @include font-A;
+    @include heading-size;
+  }
+
+  i {
+    @include hero-size;
+  }
+
+  @include flex-center-row;
+  h1 {
+    font-weight: 700;
+  }
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+}
+
+// --------------------------------------------
+
+.editBtn {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 30%;
+  cursor: pointer;
+}
+
+// --------------------------------------------------------
+.deleteBtn {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 44%;
+  cursor: pointer;
+}
+// --------------------------------------------------------
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+
+  i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    @include heading-size;
+  }
+}
+
+// --------------------------------------------
+
+.newPostBtn {
+  position: fixed;
+  z-index: 5;
+  bottom: 2.7rem;
+  right: 3%;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  @include border-radius-rounded;
+
+  i {
+    color: var(--text-primary);
+    font-size: 4rem;
+    @include respond-to(md) {
+      @include hero-icon-size;
+    }
+    @include border-radius-rounded;
+  }
+}
+
+// --------------------------------------------------------
+
+.userEditBtn {
+  background-color: transparent;
+  color: var(--info);
+  padding: 0.5rem;
+  cursor: pointer;
+  @include font-A;
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+// --------------------------------------------------------
+
+.backBtn {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  i,
+  span {
+    color: var(--text-primary);
+  }
+  span {
+    @include body-size;
+    margin-left: 0.5rem;
+  }
+  @include font-A;
+  &:hover {
+    opacity: 0.5;
+  }
+}

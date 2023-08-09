@@ -1,0 +1,32 @@
+@import "../../utilities";
+
+.maintenance {
+  min-height: 100vh;
+  display: flex !important;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &__svg {
+    max-height: 80vh;
+  }
+  h3 {
+    color: var(--text-err);
+  }
+  h4 {
+    color: var(--text-info);
+  }
+}
+
+.error__message {
+  // FIX
+  color: var(--error);
+  @include sub-body-size;
+  letter-spacing: 0.6px;
+  text-align: center;
+}
+
+.notFound {
+  &__img {
+    max-width: 100%;
+  }
+}

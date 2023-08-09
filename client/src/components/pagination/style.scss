@@ -1,0 +1,25 @@
+@import "../../utilities";
+
+.pagination {
+  padding: 3rem 0 1rem 0;
+  @include flex-center-row;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  overflow-x: scroll;
+
+  &__item {
+    @include body-size;
+    color: var(--text-primary);
+    border: none;
+    background: none;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  &__item.active {
+    font-weight: bolder;
+    color: var(--info);
+  }
+}

@@ -1,0 +1,85 @@
+@import "../../../utilities";
+
+.profileSetting {
+  padding: 2rem 0 4rem 0;
+  h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  &__content {
+    @include flex-column;
+    width: 100%;
+    max-width: $data-max-width;
+
+    @include respond-to(sm) {
+      display: flex;
+      justify-content: space-evenly;
+      gap: 3rem;
+    }
+  }
+
+  &__actions {
+    margin: 1rem;
+    @include flex-center-column;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+
+    &--name {
+      @include body-size;
+    }
+
+    &--verified {
+      i {
+        @include sub-heading-size;
+      }
+    }
+
+    &--avatar {
+      img {
+        width: 2rem;
+        aspect-ratio: 1;
+        @include border-radius-rounded;
+      }
+    }
+
+    .profileSettingItem {
+      padding: 1rem 0;
+      width: 100%;
+      @include flex-between-center-row;
+      border-bottom: 1px dotted var(--text-secondary);
+      span {
+        text-transform: capitalize;
+        @include sub-body-size;
+        @include font-A(700);
+        color: var(--text-primary);
+      }
+
+      p {
+        color: var(--text-secondary);
+      }
+    }
+
+    &--delete {
+      border-bottom: none !important;
+      button {
+        color: var(--error);
+      }
+    }
+  }
+}
+
+.bxs-user-check {
+  color: var(--icon-success);
+}
+
+.bxs-user-x {
+  color: var(--icon-err);
+}
+
+.bxs-user-check,
+.bxs-user-x {
+  &:hover {
+    opacity: 1 !important;
+    cursor: auto;
+  }
+}

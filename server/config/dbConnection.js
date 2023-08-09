@@ -1,9 +1,11 @@
-
 import mongoose from "mongoose";
- 
+
 export const connectDb = async () => {
   try {
-    const connect = await mongoose.connect(process.env.DB_URL,{ useNewUrlParser: true, useUnifiedTopology: true });
+    const connect = await mongoose.connect(process.env.DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log(
       "Database connected: ",
       connect.connection.host,
@@ -14,4 +16,3 @@ export const connectDb = async () => {
     process.exit(1);
   }
 };
-

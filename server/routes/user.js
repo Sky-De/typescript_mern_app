@@ -1,22 +1,25 @@
 import { Router } from "express";
 import { adminAuth } from "../middleware/adminAuth.js";
 import { userAuth, userOwnerAuth } from "../middleware/userAuth.js";
-import { 
-    bookMarkPost,
-    deleteUser, 
-    getUsers, 
-    loginUser, 
-    logoutUser, 
-    registerUser, 
-    updateUser, 
-    updateUserPassword
+import {
+  bookMarkPost,
+  deleteUser,
+  getPostOwnerInfo,
+  getUsers,
+  loginUser,
+  logoutUser,
+  registerUser,
+  sendVerifyEmail,
+  updateUser,
+  updateUserPassword,
+  verifyUser,
 } from "../controllers/user.js";
-
 
 const router = Router();
 
-
 router.get("/users", adminAuth, getUsers);
+router.get("/:id/name", getPostOwnerInfo);
+router.get("/:id/verify/email", sendVerifyEmail);
 
 // AUTH
 router.post("/register", registerUser);
@@ -25,8 +28,9 @@ router.post("/logout", logoutUser);
 
 // ACTIONS
 router.put("/:id/update", userOwnerAuth, updateUser);
+router.post("/:id/verify", userOwnerAuth, verifyUser);
 router.patch("/:id/update/password", userOwnerAuth, updateUserPassword);
 router.delete("/:id/delete", userOwnerAuth, deleteUser);
-router.patch("/:id/bookmark", userAuth ,bookMarkPost);
+router.patch("/:id/bookmark", userAuth, bookMarkPost);
 
 export default router;
