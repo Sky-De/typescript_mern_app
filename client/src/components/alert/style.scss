@@ -5,22 +5,25 @@
   border-radius: 5px;
   position: fixed;
   padding: 1.25rem;
+  min-width: 80%;
   top: 1px;
   right: 2rem;
-  width: 20rem;
+  // width: 20rem;
   left: 50%;
   transform: translateX(-50%);
   height: 40px;
   transition: top 0.5s ease;
   @include font-A;
   @include flex-between-center-row;
+  // gap: 1rem;
   &.active {
     top: 5.5rem;
   }
 
-  @include respond-to(xl) {
+  @include respond-to(lg) {
+    min-width: 50%;
     &.active {
-      top: 6rem;
+      top: 4rem;
     }
   }
 
@@ -46,6 +49,10 @@
     }
     h6 {
       @include sub-body-size;
+      margin-left: 1rem;
+    }
+    i {
+      @include heading-size;
     }
   }
   &__action {

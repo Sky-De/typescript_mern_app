@@ -56,7 +56,11 @@ export const registerUser = async (req, res, next) => {
     });
     const { password, lastMail, isAdmin, ...userData } = newUser._doc;
     return res
-      .cookie("access_token", token, { httpOnly: true })
+      .cookie("access_token", token, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      })
       .status(201)
       .json(userData);
   } catch (err) {
@@ -100,7 +104,11 @@ export const loginUser = async (req, res, next) => {
     const { password, lastMail, isAdmin, ...userData } = user._doc;
 
     return res
-      .cookie("access_token", token, { httpOnly: true })
+      .cookie("access_token", token, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      })
       .status(200)
       .json(userData);
   } catch (err) {
@@ -117,7 +125,11 @@ export const loginUser = async (req, res, next) => {
 export const logoutUser = async (req, res, next) => {
   try {
     return res
-      .cookie("access_token", "", { httpOnly: true })
+      .cookie("access_token", "", {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      })
       .status(200)
       .json({ message: "User logout DONE!" });
   } catch (err) {
