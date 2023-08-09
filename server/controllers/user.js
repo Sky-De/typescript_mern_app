@@ -174,7 +174,7 @@ export const updateUser = async (req, res, next) => {
 
   // prevents updating isAdmin and password here
   if (newUser.isAdmin || newUser.password) {
-    res.status(403);
+    res.status(401);
     return next(new Error("You are not allowed for this action!"));
   }
 
@@ -243,7 +243,7 @@ export const deleteUser = async (req, res, next) => {
 
     // prevents deleteing admin account--temp-FIX
     if (userExist.isAdmin) {
-      res.status(403);
+      res.status(401);
       return next(new Error("You are not allowed for this action."));
     }
 

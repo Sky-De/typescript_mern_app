@@ -13,6 +13,7 @@ import {
 // -------------------------------------------------------------------------userAuth-----
 export const userAuth = (req, res, next) => {
   const { access_token } = req.cookies;
+  console.log("this is userAuth token", access_token);
 
   if (!access_token) return ForbiddenResponse(res);
   const decodedData = tokenDecoder(access_token);
@@ -74,7 +75,7 @@ export const userOwnerAuth = async (req, res, next) => {
     if (decodedData.id === id || user.isAdmin) {
       req.userId = id;
     } else {
-      res.status(403);
+      res.status(401);
       return next(new Error("You are not allowed for this action"));
     }
   } catch (error) {
@@ -86,7 +87,7 @@ export const userOwnerAuth = async (req, res, next) => {
 
   if (req.userId) return next();
   else {
-    res.status(403);
+    res.status(401);
     return next(new Error("You are not allowed for this action"));
   }
 };

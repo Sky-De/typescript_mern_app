@@ -35,11 +35,11 @@ export const mongooseIdValidator = (id) => mongoose.Types.ObjectId.isValid(id);
 // ERR RESPONSES
 export const ExpiredTokenResponse = (res) =>
   res
-    .status(403)
+    .status(401)
     .json({ message: "Token Is Expired, reset page and login again" });
 
 export const ForbiddenResponse = (res) =>
-  res.status(403).json({ message: "Your are not allowed!" });
+  res.status(401).json({ message: "You are not allowed for this action!" });
 
 export const UnauthorizedResponse = (res) =>
   res
