@@ -13,9 +13,7 @@ env.config();
 const app = express();
 app.use(
   cors({
-    // origin: true,
-    origin:
-      "https://app.netlify.com/sites/sunny-cheesecake-4b7d8f/deploys/64d3b41d8e041c7d924a1a91",
+    origin: true,
     credentials: true,
     sameSite: "none",
     secure: true,
