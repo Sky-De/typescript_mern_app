@@ -11,8 +11,10 @@ import errorHandler from "./middleware/errorHandler.js";
 
 env.config();
 const app = express();
-app.use(cors({ origin: true, credentials: true }));
-app.use(cookieParser({ sameSite: "none", secure: true }));
+app.use(
+  cors({ origin: true, credentials: true, sameSite: "none", secure: true })
+);
+app.use(cookieParser());
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
