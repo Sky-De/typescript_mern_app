@@ -20,7 +20,8 @@ const VerifyUser: React.FC = () => {
   // last dispatch
 
   // limit for sending mail
-  const SEND_MAIL_LIMIT_TIME = 59;
+  // const SEND_MAIL_LIMIT_TIME = 59;
+  const SEND_MAIL_LIMIT_TIME = 5;
   const [timer, setTimer] = useState(SEND_MAIL_LIMIT_TIME);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   useEffect(() => {

@@ -179,13 +179,14 @@ export const getVerifyEmail = createAsyncThunk(
   "user/getVerifyEmail",
   async (id: string, { dispatch }) => {
     const { data } = await API.get(`user/${id}/verify/email`);
+    console.log(data, "data crator");
+
     dispatch(
       activeAlert({
         type: "SUCCESS",
-        message: "Verify code sended to your email!",
+        message: data.msg,
       })
     );
-    console.log(data);
 
     return data;
   }

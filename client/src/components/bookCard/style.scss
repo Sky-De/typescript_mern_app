@@ -3,6 +3,7 @@
 .card {
   @include border-radius-card;
   overflow: hidden;
+  width: 100%;
 
   list-style: none;
   background: var(--bg-primary);
@@ -106,6 +107,10 @@
       font-weight: bold;
       margin-left: auto;
       user-select: none;
+    }
+
+    &--like {
+      margin-left: 0 !important;
     }
   }
 

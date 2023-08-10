@@ -137,9 +137,17 @@
   }
 
   &__inputControl {
-    width: 100%;
+    border: 1px dotted var(--icon-err);
+    &.checked {
+      border: 1px dotted var(--icon-success);
+    }
+    cursor: pointer;
+    width: fit-content;
+    align-self: flex-start;
+    padding: 0.25rem;
     label {
       margin-left: 0.5rem;
+      cursor: pointer;
     }
   }
 }

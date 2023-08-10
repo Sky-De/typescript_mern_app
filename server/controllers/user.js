@@ -347,6 +347,7 @@ export const verifyUser = async (req, res, next) => {
 
 export const sendVerifyEmail = async (req, res, next) => {
   const { id } = req.params;
+  console.log("im here");
 
   try {
     const user = await UserModel.findById(id);
@@ -404,7 +405,16 @@ export const sendVerifyEmail = async (req, res, next) => {
     transporter
       .sendMail(message)
       .then(() => {
-        return res.status(201).json({ msg: "you should receive an email" });
+        res.header(
+          "Access-Control-Allow-Origin",
+          "https://puce-worried-barnacle.cyclic.app/api/v1/"
+        );
+        return (
+          res
+            // .header("Access-Control-Allow-Origin", "*")
+            .status(201)
+            .json({ msg: "Verify code sended to your email!" })
+        );
       })
       .catch((error) => {
         console.log(error);

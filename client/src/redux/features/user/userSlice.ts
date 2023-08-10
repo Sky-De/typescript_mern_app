@@ -48,7 +48,7 @@ export type ActionErrorType = PayloadAction<
 >;
 
 const initialUserState: UserState = {
-  user: JSON.parse(localStorage.getItem("user") ?? "null"),
+  user: JSON.parse(sessionStorage.getItem("user") ?? "null"),
   isLoading: false,
   error: null,
 };
@@ -77,7 +77,7 @@ const userSlice = createSlice({
       (state, action: PayloadAction<User>) => {
         state.isLoading = false;
         state.user = action.payload;
-        localStorage.setItem("user", JSON.stringify(state.user));
+        sessionStorage.setItem("user", JSON.stringify(state.user));
       }
     );
     builder.addCase(registerUser.rejected, (state, action: ActionErrorType) => {
@@ -110,13 +110,10 @@ const userSlice = createSlice({
     builder.addCase(getVerifyEmail.fulfilled, (state) => {
       state.isLoading = false;
     });
-    builder.addCase(
-      getVerifyEmail.rejected,
-      (state, action: ActionErrorType) => {
-        state.isLoading = false;
-        state.error = action.error.message || "Failed to verify user";
-      }
-    );
+    builder.addCase(getVerifyEmail.rejected, (state) => {
+      state.isLoading = false;
+      state.error = "Sending verify email failed!";
+    });
     // ---------------------------------------login---
     builder.addCase(loginUser.pending, (state) => {
       state.isLoading = true;
@@ -127,7 +124,7 @@ const userSlice = createSlice({
       (state, action: PayloadAction<User>) => {
         state.user = action.payload;
         state.isLoading = false;
-        localStorage.setItem("user", JSON.stringify(state.user));
+        sessionStorage.setItem("user", JSON.stringify(state.user));
       }
     );
     // FIX--PayloadAction<this types>
@@ -143,7 +140,7 @@ const userSlice = createSlice({
     builder.addCase(logoutUser.fulfilled, (state) => {
       state.user = null;
       state.isLoading = false;
-      localStorage.removeItem("user");
+      sessionStorage.removeItem("user");
     });
     builder.addCase(logoutUser.rejected, (state, action: ActionErrorType) => {
       state.isLoading = false;
@@ -159,7 +156,7 @@ const userSlice = createSlice({
       (state, action: PayloadAction<User>) => {
         state.isLoading = false;
         state.user = action.payload;
-        localStorage.setItem("user", JSON.stringify(state.user));
+        sessionStorage.setItem("user", JSON.stringify(state.user));
       }
     );
     builder.addCase(updateUser.rejected, (state, action: ActionErrorType) => {
@@ -193,7 +190,7 @@ const userSlice = createSlice({
     builder.addCase(deleteUser.fulfilled, (state) => {
       state.isLoading = false;
       state.user = null;
-      localStorage.removeItem("user");
+      sessionStorage.removeItem("user");
     });
     builder.addCase(deleteUser.rejected, (state, action: ActionErrorType) => {
       state.isLoading = false;
@@ -211,7 +208,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.user = action.payload;
         // const reduxStore = store.getState();
-        localStorage.setItem("user", JSON.stringify(state.user));
+        sessionStorage.setItem("user", JSON.stringify(state.user));
       }
     );
     builder.addCase(bookMarkPost.rejected, (state, action: ActionErrorType) => {

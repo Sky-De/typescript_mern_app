@@ -3,6 +3,11 @@
 .input {
   @include flex-align-center-column;
 
+  textarea {
+    height: 5rem !important;
+    resize: none;
+  }
+
   label {
     @include sub-body-size;
     text-transform: capitalize;
@@ -10,7 +15,7 @@
 
   &__control {
     position: relative;
-    height: 2rem;
+    height: 2.5rem;
     width: 15rem;
     margin-top: 0.25rem;
   }

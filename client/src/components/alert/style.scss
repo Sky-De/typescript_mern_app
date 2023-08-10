@@ -52,10 +52,11 @@
       margin-left: 1rem;
     }
     i {
-      @include heading-size;
+      @include sub-heading-size;
     }
   }
   &__action {
     cursor: pointer;
+    margin-left: 1rem;
   }
 }

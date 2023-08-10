@@ -7,7 +7,7 @@ type ThemeState = {
 // sets initial theme base on time
 const isNightTime = (): boolean => {
   const currentHour = new Date().getHours();
-  return currentHour >= 18 || currentHour < 6;
+  return currentHour >= 19 || currentHour < 7;
 };
 
 const initialUserState: ThemeState = {

@@ -7,15 +7,18 @@
   color: var(--text-primary);
   box-shadow: 0px 0px 20px -15px var(--text-primary);
   @include flex-center-row;
-  gap: 0.75rem;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
 
   &__link {
-    i {
-      @include hero-size;
+    margin-left: 1.5rem !important;
+    svg {
+      width: 2.5rem;
+      @include respond-to(md) {
+        width: 2rem;
+      }
     }
   }
 }
