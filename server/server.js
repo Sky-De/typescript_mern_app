@@ -21,27 +21,18 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  console.log(res.header);
+  const allowedOrigins = [
+    "https://sprightly-baklava-7dd4f2.netlify.app",
+    "http://localhost:3000",
+  ];
+  const origin = req.headers.origin;
 
-  // // Request methods you wish to allow
-  // res.setHeader(
-  //   "Access-Control-Allow-Methods",
-  //   "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  // );
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
 
-  // // Request headers you wish to allow
-  // res.setHeader(
-  //   "Access-Control-Allow-Headers",
-  //   "X-Requested-With,content-type"
-  // );
+  // Other CORS headers and settings if needed
 
-  // // Set to true if you need the website to include cookies in the requests sent
-  // // to the API (e.g. in case you use sessions)
-  // res.setHeader("Access-Control-Allow-Credentials", true);
-
-  // // Pass to next layer of middleware
   next();
 });
 
