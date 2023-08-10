@@ -350,58 +350,58 @@ export const sendVerifyEmail = async (req, res, next) => {
   console.log("im here");
 
   try {
-    const user = await UserModel.findById(id);
-    const TOKEN = verifyTokenGenerator();
-    await UserModel.findByIdAndUpdate(
-      id,
-      { lastMail: { verifyCode: TOKEN } },
-      { new: true }
-    );
+    // const user = await UserModel.findById(id);
+    // const TOKEN = verifyTokenGenerator();
+    // await UserModel.findByIdAndUpdate(
+    //   id,
+    //   { lastMail: { verifyCode: TOKEN } },
+    //   { new: true }
+    // );
 
-    let config = {
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_APP_PASS,
-      },
-    };
+    // let config = {
+    //   service: "gmail",
+    //   auth: {
+    //     user: process.env.EMAIL,
+    //     pass: process.env.EMAIL_APP_PASS,
+    //   },
+    // };
 
-    let transporter = nodemailer.createTransport(config);
+    // let transporter = nodemailer.createTransport(config);
 
-    let MailGenerator = new Mailgen({
-      theme: "default",
-      product: {
-        name: "Mailgen",
-        link: "https://mailgen.js/",
-      },
-    });
+    // let MailGenerator = new Mailgen({
+    //   theme: "default",
+    //   product: {
+    //     name: "Mailgen",
+    //     link: "https://mailgen.js/",
+    //   },
+    // });
 
-    let response = {
-      body: {
-        name: `${user.name}`,
-        intro:
-          "BookShare app verification, if you did not ask for this email ignore it, otherwise use token to verify your email.",
-        table: {
-          data: [
-            {
-              title: "verify token",
-              payload: TOKEN,
-            },
-          ],
-        },
-        // outro: "Have fun with BookShareApp :)",
-      },
-    };
+    // let response = {
+    //   body: {
+    //     name: `${user.name}`,
+    //     intro:
+    //       "BookShare app verification, if you did not ask for this email ignore it, otherwise use token to verify your email.",
+    //     table: {
+    //       data: [
+    //         {
+    //           title: "verify token",
+    //           payload: TOKEN,
+    //         },
+    //       ],
+    //     },
+    //     // outro: "Have fun with BookShareApp :)",
+    //   },
+    // };
 
-    let mail = MailGenerator.generate(response);
+    // let mail = MailGenerator.generate(response);
 
-    let message = {
-      from: process.env.EMAIL,
-      to: user.email,
-      subject: "Verify Email",
-      html: mail,
-    };
-    console.log(message);
+    // let message = {
+    //   from: process.env.EMAIL,
+    //   to: user.email,
+    //   subject: "Verify Email",
+    //   html: mail,
+    // };
+    // console.log(message);
 
     // transporter
     //   .sendMail(message)
@@ -415,9 +415,10 @@ export const sendVerifyEmail = async (req, res, next) => {
     //     res.status(500);
     //     return next(new Error("Something went wrong in sendMail catch block"));
     //   });
+    // res.status(200).json({ message: "done" });
+    res.status(200).json({ message: "done" });
   } catch (error) {
     res.status(500);
-    console.log(error);
     next(new Error("Something went wrong in sendVerifyEmail catch block"));
   }
 };
