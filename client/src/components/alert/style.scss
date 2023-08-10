@@ -8,7 +8,6 @@
   min-width: 80%;
   top: 1px;
   right: 2rem;
-  // width: 20rem;
   left: 50%;
   transform: translateX(-50%);
   height: 40px;
@@ -17,7 +16,10 @@
   @include flex-between-center-row;
   // gap: 1rem;
   &.active {
-    top: 5.5rem;
+    top: calc($header-hight-mobile + 10px) !important;
+    @include respond-to(md) {
+      top: calc($header-hight-desktop) !important;
+    }
   }
 
   @include respond-to(lg) {
