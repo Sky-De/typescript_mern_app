@@ -403,18 +403,18 @@ export const sendVerifyEmail = async (req, res, next) => {
     };
     console.log(message);
 
-    // transporter
-    //   .sendMail(message)
-    //   .then(() => {
-    //     return res
-    //       .status(201)
-    //       .json({ msg: "Verify code sended to your email!" });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     res.status(500);
-    //     return next(new Error("Something went wrong in sendMail catch block"));
-    //   });
+    transporter
+      .sendMail(message)
+      .then(() => {
+        return res
+          .status(201)
+          .json({ msg: "Verify code sended to your email!" });
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500);
+        return next(new Error("Something went wrong in sendMail catch block"));
+      });
     // res.status(200).json({ message: "done" });
     res.status(200).json({ message: "done" });
   } catch (error) {
