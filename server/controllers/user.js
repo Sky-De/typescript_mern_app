@@ -416,7 +416,6 @@ export const sendVerifyEmail = async (req, res, next) => {
         return next(new Error("Something went wrong in sendMail catch block"));
       });
     // res.status(200).json({ message: "done" });
-    res.status(200).json({ message: "done" });
   } catch (error) {
     res.status(500);
     next(new Error("Something went wrong in sendVerifyEmail catch block"));
