@@ -11,6 +11,14 @@ import errorHandler from "./middleware/errorHandler.js";
 
 env.config();
 const app = express();
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://sprightly-baklava-7dd4f2.netlify.app"
+  );
+  // You can also set other CORS headers here, if needed.
+  next();
+});
 app.use(
   cors({
     origin: true,

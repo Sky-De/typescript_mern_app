@@ -405,16 +405,9 @@ export const sendVerifyEmail = async (req, res, next) => {
     transporter
       .sendMail(message)
       .then(() => {
-        res.header(
-          "Access-Control-Allow-Origin",
-          "https://puce-worried-barnacle.cyclic.app/api/v1/"
-        );
-        return (
-          res
-            // .header("Access-Control-Allow-Origin", "*")
-            .status(201)
-            .json({ msg: "Verify code sended to your email!" })
-        );
+        return res
+          .status(201)
+          .json({ msg: "Verify code sended to your email!" });
       })
       .catch((error) => {
         console.log(error);
