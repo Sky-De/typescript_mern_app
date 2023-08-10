@@ -11,6 +11,9 @@ import errorHandler from "./middleware/errorHandler.js";
 
 env.config();
 const app = express();
+app.use(cookieParser());
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(
   cors({
     origin: true,
@@ -19,26 +22,6 @@ app.use(
     secure: true,
   })
 );
-
-app.use((req, res, next) => {
-  const allowedOrigins = [
-    "https://sprightly-baklava-7dd4f2.netlify.app",
-    "http://localhost:3000",
-  ];
-  const origin = req.headers.origin;
-
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  }
-
-  // Other CORS headers and settings if needed
-
-  next();
-});
-
-app.use(cookieParser());
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.get("/", (req, res) =>
   res.status(200).json("Welcome to my express server")
