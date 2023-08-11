@@ -13,7 +13,6 @@ import {
 // -------------------------------------------------------------------------userAuth-----
 export const userAuth = (req, res, next) => {
   const { access_token } = req.cookies;
-  console.log("this is userAuth token", access_token);
 
   if (!access_token) return ForbiddenResponse(res);
   const decodedData = tokenDecoder(access_token);

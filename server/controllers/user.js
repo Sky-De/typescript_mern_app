@@ -191,6 +191,13 @@ export const updateUser = async (req, res, next) => {
   }
 
   try {
+    if (newUser.name) {
+      const nameExist = await UserModel.findOne({ name: newUser.name });
+      if (nameExist) {
+        res.status(400);
+        return next(new Error("This name already exists!"));
+      }
+    }
     const updatedUser = await UserModel.findByIdAndUpdate(id, newUser, {
       new: true,
     });
