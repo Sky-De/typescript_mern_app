@@ -16,10 +16,12 @@
 
   &__input {
     width: 8.1rem;
+    letter-spacing: 1rem;
     padding: 0.5rem 0.25rem;
     border: 1px solid var(--text-secondary);
     text-align: center;
     justify-self: flex-end;
+    @include flex-center-row;
     @include respond-to(lg) {
       width: 8.8rem;
     }

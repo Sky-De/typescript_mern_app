@@ -19,9 +19,8 @@ const VerifyUser: React.FC = () => {
   }, [dispatch]);
   // last dispatch
 
-  // limit for sending mail
-  // const SEND_MAIL_LIMIT_TIME = 59;
-  const SEND_MAIL_LIMIT_TIME = 5;
+  // limit for sending email
+  const SEND_MAIL_LIMIT_TIME = 59;
   const [timer, setTimer] = useState(SEND_MAIL_LIMIT_TIME);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   useEffect(() => {
@@ -78,14 +77,20 @@ const VerifyUser: React.FC = () => {
         type="button"
         onClick={handleSendMail}
       >
-        {isLoading ? <CircularLoading /> : isTimerRunning ? timer : "send mail"}
+        {isLoading ? (
+          <CircularLoading isDark={true} />
+        ) : isTimerRunning ? (
+          timer
+        ) : (
+          "send mail"
+        )}
       </button>
       <button
         className="verifyUser__btn confirm"
         disabled={formData.length < 4}
         type="submit"
       >
-        {isLoading ? <CircularLoading /> : "confirm"}
+        {isLoading ? <CircularLoading isDark={true} /> : "confirm"}
       </button>
       <div className="verifyUser__errorCon">
         {error && <ErrorMessage errMessage={error} />}

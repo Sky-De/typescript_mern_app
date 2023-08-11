@@ -25,7 +25,7 @@ export const useRegisterFormValidator = (formData: RegisterFormProps) => {
   const [validation, setValidation] = useState<Validation>(
     initialValidationState
   );
-  const minPassLength = 3;
+  const minPassLength = 6;
 
   useEffect(() => {
     if (formData.password !== formData.repeatPassword)

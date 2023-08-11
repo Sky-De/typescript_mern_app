@@ -25,6 +25,11 @@
       width: 35px;
       height: 35px;
     }
+
+    &.dark {
+      border: 3px solid var(--text-primary-op) !important;
+      border-top-color: transparent !important;
+    }
   }
 }
 
