@@ -69,7 +69,7 @@ const ChangeImgForm: React.FC = () => {
         isLoading={isLoading}
         tag="Change Image"
       />
-      {uploadImageLoading && <CircularLoading />}
+      {uploadImageLoading && <CircularLoading isBoth={true} />}
       {error && <ErrorMessage errMessage={error} />}
       {uploadImageError && <ErrorMessage errMessage="Uploading image faild!" />}
     </form>

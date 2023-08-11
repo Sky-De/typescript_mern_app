@@ -135,7 +135,7 @@ const PostForm: React.FC<{ isUpdate: boolean }> = ({ isUpdate }) => {
         isLoading={allPosts.isLoading}
         tag={isUpdate ? "save" : "create"}
       />
-      {uploadImageLoading && <CircularLoading />}
+      {uploadImageLoading && <CircularLoading isBoth={true} />}
       {formErr.isError && <ErrorMessage errMessage={formErr.msg} />}
       {allPosts.error && <ErrorMessage errMessage={allPosts.error} />}
       {uploadImageError && (
