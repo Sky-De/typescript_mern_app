@@ -28,15 +28,15 @@ const Home: React.FC = () => {
     postsCount: allPosts.count,
   });
 
-  const incraseBookmarksPageHandler = () => {
+  const incrasePageHandler = () => {
     if (allPosts.currentPage >= totalPages) return;
     dispatch(incraseAllPostsPage());
   };
-  const decraseBookmarksPageHandler = () => {
+  const decrasePageHandler = () => {
     if (allPosts.currentPage <= 1) return;
     dispatch(decraseAllPostsPage());
   };
-  const setAllPostsPageHandler = ({ pageNumber }: PageNumberData) =>
+  const setPageHandler = ({ pageNumber }: PageNumberData) =>
     dispatch(setAllPostsPage(pageNumber));
 
   useEffect(() => {
@@ -61,9 +61,9 @@ const Home: React.FC = () => {
         (allPosts.currentPage !== 1 &&
           allPosts.posts.length <= allPosts.postPerPage)) && (
         <Pagination
-          decrasePageHandler={decraseBookmarksPageHandler}
-          incrasePageHandler={incraseBookmarksPageHandler}
-          setPageHandler={setAllPostsPageHandler}
+          decrasePageHandler={decrasePageHandler}
+          incrasePageHandler={incrasePageHandler}
+          setPageHandler={setPageHandler}
           currentPage={allPosts.currentPage}
           isLoading={allPosts.isLoading}
           pagesArray={pagesArray}
