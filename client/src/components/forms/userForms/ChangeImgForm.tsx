@@ -58,9 +58,9 @@ const ChangeImgForm: React.FC = () => {
         src={
           selectedImage
             ? URL.createObjectURL(selectedImage)
+            : user?.imgUrl === ""
+            ? Avatar
             : user?.imgUrl
-            ? user?.imgUrl
-            : Avatar
         }
         alt="user avatar"
       />
