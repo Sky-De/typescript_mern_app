@@ -4,6 +4,7 @@ import themeReducer from "../features/theme/themeSlice";
 import modelReducer from "../features/model/modelSlice";
 import postReducer from "../features/post/postSlice";
 import alertReducer from "../features/alert/alertSlice";
+import feedbackReducer from "../features/feedback/feedbackSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     model: modelReducer,
     post: postReducer,
     alert: alertReducer,
+    feedback: feedbackReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -14,6 +14,7 @@ import CircularLoading from "../../components/loading/CircularLoading";
 import HomeIntro from "../../components/homeIntro/HomeIntro";
 import ErrorMessage from "../../components/Error/Error";
 import "./style.scss";
+import FeedbacksSlider from "../../components/feedback/FeedbacksSlider";
 
 const Home: React.FC = () => {
   const { allPosts } = useAppSelectore((state) => state.post);
@@ -53,6 +54,7 @@ const Home: React.FC = () => {
     <main className="home">
       {/* -----------------INTRO------------------- */}
       <HomeIntro />
+
       {/* ----------------LIST-------------------- */}
       <BooksList posts={allPosts.posts} />
       {allPosts.isLoading && allPosts.posts.length === 0 && <CircularLoading />}
@@ -71,6 +73,9 @@ const Home: React.FC = () => {
       )}
       {/* -----------------ERROR------------------- */}
       {allPosts.error && <ErrorMessage errMessage={allPosts.error} />}
+      {/* -----------------Feedbacks------------------- */}
+      {/* add loading and error--FIX */}
+      <FeedbacksSlider />
     </main>
   );
 };

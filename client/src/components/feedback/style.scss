@@ -1,0 +1,59 @@
+@import "../../utilities";
+
+.feedbacks {
+  //   @include B;
+  width: 100%;
+  @include respond-to(md) {
+    width: 50%;
+  }
+  // @include B;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: $content-max-width;
+  &__title {
+    text-align: center;
+    @include heading-size;
+    margin: 1rem 0;
+  }
+  img {
+    width: 4rem !important;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  &__slider {
+    width: inherit;
+  }
+
+  &__slider--item {
+    padding: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    @include font-B;
+    // border: 1px solid rgb(87, 184, 12);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 70%;
+    margin: 0 auto;
+    @include border-radius-item;
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    & blockquote {
+      color: var(--text-primary);
+      @include heading-size;
+      @include font-B;
+      span {
+        @include hero-size;
+      }
+    }
+    & figcaption {
+      @include font-A(700);
+      p {
+        text-transform: capitalize;
+      }
+    }
+  }
+}

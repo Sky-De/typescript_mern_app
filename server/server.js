@@ -6,6 +6,8 @@ import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/user.js";
 import bookRoutes from "./routes/post.js";
+import feedbackRoutes from "./routes/feedback.js";
+
 import { connectDb } from "./config/dbConnection.js";
 import errorHandler from "./middleware/errorHandler.js";
 
@@ -30,6 +32,8 @@ app.get("/", (req, res) =>
 app.use("/api/v1/user", authRoutes);
 // POST
 app.use("/api/v1/post", bookRoutes);
+// FEEDBACK
+app.use("/api/v1/feedback", feedbackRoutes);
 // ERROR
 app.use(errorHandler);
 

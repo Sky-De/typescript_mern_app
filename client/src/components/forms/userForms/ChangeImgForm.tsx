@@ -22,6 +22,8 @@ const ChangeImgForm: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const dispatch = useAppDispatch();
+
+  // uploads img on cloudinary and return these vars
   const {
     coverUrl: uploadImageUrl,
     isLoading: uploadImageLoading,

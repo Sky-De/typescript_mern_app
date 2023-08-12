@@ -22,17 +22,16 @@
     align-items: flex-start;
   }
   &__info--createdBy {
-    color: var(--text-secondary);
+    color: var(--text-primary);
   }
   &__info--createdAt {
     @include sub-body-size;
     color: var(--text-secondary);
     z-index: 2;
   }
-
   &__ownerImage {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3rem;
+    height: 3rem;
     @include border-radius-rounded;
     z-index: 2;
   }

@@ -30,7 +30,9 @@ const PostStatus: FC<PostStatusProps> = ({ createdAt, name, imgUrl }) => {
   return (
     <div className="postStatus">
       <div className="postStatus__info">
-        <strong>{name ? name : "user"} </strong>
+        <strong className="postStatus__info--createdBy">
+          {name ? name : "user"}{" "}
+        </strong>
         {renderTimeAgo(timeAgoPosted)}
       </div>
       <img
