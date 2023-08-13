@@ -1,0 +1,307 @@
+// colors for default light mode
+:root {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+
+  --bg-primary: #ffffff;
+  --bg-primary-blur: #ffffffd6;
+  --bg-primary-op: #000;
+  --bg-secondary: #e7e7e7;
+  --bg-secondary-op: #212121;
+  --text-primary: #212121;
+  --text-primary-op: #ffffff;
+  --text-secondary: #757575;
+  --bg-model: #000000a0;
+  // -----------
+  --error: #d32f2f;
+  --info: #0288d1;
+  --success: #2e7d32;
+  --warning: #f2ff00;
+  --disable: #808080;
+  // -----------
+  --bg-err: #fdeded;
+  --icon-err: #e27171;
+  --text-err: #895655;
+
+  --bg-success: #edf7ed;
+  --icon-success: #408844;
+  --text-success: #678468;
+
+  --bg-warning: #fff4e5;
+  --icon-warning: #ee7918;
+  --text-warning: #876432;
+
+  --bg-info: #e5f6fd;
+  --icon-info: #5bb3e3;
+  --text-info: #43778e;
+}
+
+// colors for selected dark mode
+.App.dark {
+  --bg-primary: #121212;
+  --bg-primary-blur: #121212d9;
+  --bg-primary-op: #fff;
+  --bg-secondary: #212121;
+  --bg-secondary-op: #e7e7e7;
+  --text-primary: #ffffff;
+  --text-primary-op: #212121;
+  --text-secondary: #bdbdbd;
+  --bg-model: #606060a0;
+
+  // ----
+  --error: #d32f2f;
+  --info: #d16a02;
+  --warning: #f2ff00;
+  --success: #2e7d32;
+  --disable: #808080;
+  // ----
+  --bg-err: #160b0b;
+  --icon-err: #de3d31;
+  --text-err: #ecc0c0;
+
+  --bg-success: #0c130d;
+  --icon-success: #5daa60;
+  --text-success: #acc4ad;
+
+  --bg-warning: #191207;
+  --icon-warning: #d98e20;
+  --text-warning: #d9bf99;
+
+  --bg-info: #071318;
+  --icon-info: #239bd2;
+  --text-info: #aedcef;
+}
+
+// border for dev style check
+@mixin B {
+  border: 2px solid rgb(107, 14, 14);
+}
+
+// layout mixins--------------------------
+
+@mixin flex-between-center-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin flex-end-row {
+  display: flex;
+  justify-content: flex-end;
+}
+@mixin flex-end-center-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// both center
+@mixin flex-center-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin flex-center-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@mixin flex-align-center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin flex-start-center-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@mixin flex-end-center-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+@mixin flex-align-center-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+// varibles - not used - show case
+// $bg-primary: #121212;
+// $bg-primary-blur: #121212d9;
+// $bg-primary-op: #ffffffca;
+// $bg-secondary: #212121;
+// $text-primary: #ffffff;
+// $text-secondary: #bdbdbd;
+// $bg-button: #4caf50;
+// $color-button: #ffffff;
+// $error: #d32f2f;
+// $info: #0288d1;
+// $success: #2e7d32;
+// $disable: #808080;
+
+//
+$header-hight-mobile: 70px;
+$header-hight-desktop: 80px;
+$footer-hight-mobile: 4.5rem;
+$itemBorderRadius: 3px;
+$content-max-width: 1570px;
+$data-max-width: 1000px;
+
+// fonts---------------------------------------
+@mixin font-B($fontWeigth: null) {
+  @if $fontWeigth {
+    font-family: "Nunito", sans-serif !important;
+    font-weight: $fontWeigth !important;
+  } @else {
+    font-family: "Nunito", sans-serif !important;
+  }
+}
+
+@mixin font-A($fontWeigth: null) {
+  @if $fontWeigth {
+    font-family: "ROBOTO", sans-serif !important;
+    font-weight: $fontWeigth !important;
+  } @else {
+    font-family: "ROBOTO", sans-serif !important;
+  }
+}
+
+// font-sizes--the value of rem changes based on query in index.scss 14px / 16px/ 18px as root font-size
+@mixin hero-size {
+  font-size: 2rem !important;
+}
+@mixin hero-icon-size {
+  font-size: 3rem !important;
+}
+@mixin sub-heading-size {
+  font-size: 1.5714rem !important;
+}
+@mixin heading-size {
+  font-size: 1.2857rem !important;
+}
+@mixin body-size {
+  font-size: 1rem !important;
+}
+@mixin sub-body-size {
+  font-size: 0.8571rem !important;
+}
+
+// comon styles / mixins
+@mixin border-radius-card {
+  border-radius: 20px;
+}
+
+@mixin border-radius-rounded {
+  border-radius: 50%;
+}
+@mixin border-radius-item {
+  border-radius: 3px;
+}
+
+@mixin content-max-width {
+  width: 100%;
+  max-width: $content-max-width;
+}
+
+// ----------media qurey based on width
+@mixin respond-to($breakpoint-from, $breakpoint-to: null) {
+  $breakpoints: (
+    xs: 0px,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+  );
+
+  $from: map-get($breakpoints, $breakpoint-from);
+  $to: map-get($breakpoints, $breakpoint-to);
+
+  @if not $from {
+    @warn "Invalid 'from' breakpoint: #{$breakpoint-from}. Check your breakpoint name.";
+  }
+
+  @if $from {
+    @if $to {
+      @media (min-width: $from) and (max-width: $to) {
+        @content;
+      }
+    } @else {
+      @media (min-width: $from) {
+        @content;
+      }
+    }
+  }
+}
+
+// alert styles----------------------------------
+@mixin alert-style-err {
+  background: var(--bg-err);
+  i {
+    color: var(--icon-err);
+  }
+  h6 {
+    color: var(--text-err);
+  }
+  & div {
+    color: var(--text-err);
+  }
+}
+
+@mixin alert-style-success {
+  background: var(--bg-success);
+  i {
+    color: var(--icon-success);
+  }
+  h6 {
+    color: var(--text-success);
+  }
+  & div {
+    color: var(--text-success);
+  }
+}
+@mixin alert-style-warning {
+  background: var(--bg-warning);
+  i {
+    color: var(--icon-warning);
+  }
+  h6 {
+    color: var(--text-warning);
+  }
+  & div {
+    color: var(--text-warning);
+  }
+}
+@mixin alert-style-info {
+  background: var(--bg-info);
+  i {
+    color: var(--icon-info);
+  }
+  h6 {
+    color: var(--text-info);
+  }
+  & div {
+    color: var(--text-info);
+  }
+}
+
+// query based on aspect-ratio-----------------------
+@mixin widescreen {
+  @media (min-aspect-ratio: 3/2) {
+    @content;
+  }
+}
+
+@mixin tallscreen {
+  @media (max-aspect-ratio: 13/20) {
+    @content;
+  }
+}

@@ -1,0 +1,46 @@
+@import "../../utilities";
+
+.input {
+  @include flex-align-center-column;
+
+  textarea {
+    height: 5rem !important;
+    resize: none;
+  }
+
+  label {
+    @include sub-body-size;
+    text-transform: capitalize;
+  }
+
+  &__control {
+    position: relative;
+    height: 2.5rem;
+    width: 15rem;
+    margin-top: 0.25rem;
+  }
+
+  &__item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-secondary);
+    padding-left: 0.75rem;
+    @include font-A;
+    font-weight: 500;
+    color: var(--text-primary);
+    &:focus {
+      outline: auto;
+    }
+  }
+}
+
+.showPassIcon {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}

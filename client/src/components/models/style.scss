@@ -1,0 +1,21 @@
+@import "../../utilities";
+form {
+  @include flex-align-center-column;
+  // FIX
+  padding: 3rem;
+  gap: 1.3rem;
+  background: var(--bg-primary);
+  @include border-radius-item;
+}
+
+.LogoutAlert {
+  padding: 8rem;
+  background: var(--bg-primary);
+}
+
+.model {
+  z-index: 6;
+  &__contentCon {
+    position: relative;
+  }
+}

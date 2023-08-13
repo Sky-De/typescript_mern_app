@@ -1,0 +1,65 @@
+@import "../../utilities";
+
+.alert {
+  opacity: 0;
+  z-index: 5;
+  border-radius: 5px;
+  position: fixed;
+  padding: 1.25rem;
+  min-width: 80%;
+  top: 1px;
+  right: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 40px;
+  transition: top 0.5s ease, opacity 0.5s ease;
+  @include font-A;
+  @include flex-between-center-row;
+  &.active {
+    opacity: 1;
+    top: calc($header-hight-mobile + 10px) !important;
+    @include respond-to(md) {
+      top: calc($header-hight-desktop) !important;
+    }
+  }
+
+  @include respond-to(lg) {
+    min-width: 50%;
+    &.active {
+      top: 4rem;
+    }
+  }
+
+  &.SUCCESS {
+    @include alert-style-success;
+  }
+  &.FAILD {
+    @include alert-style-err;
+  }
+  &.INFO {
+    @include alert-style-info;
+  }
+  &.WARNING {
+    @include alert-style-warning;
+  }
+
+  &__content {
+    @include flex-center-row;
+    gap: 0.3rem;
+    i,
+    h6 {
+      color: var(--text-primary);
+    }
+    h6 {
+      @include sub-body-size;
+      margin-left: 1rem;
+    }
+    i {
+      @include sub-heading-size;
+    }
+  }
+  &__action {
+    cursor: pointer;
+    margin-left: 1rem;
+  }
+}

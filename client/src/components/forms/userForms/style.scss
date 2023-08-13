@@ -1,0 +1,170 @@
+@import "../../../utilities";
+
+.authForm {
+  &__icon {
+    @include hero-icon-size;
+    color: var(--text-primary);
+    &:hover {
+      opacity: 1 !important;
+      // color: hsl(253, 70%, 50%);
+    }
+    margin-bottom: 0.5rem;
+    cursor: auto !important;
+  }
+
+  &__submitBtn {
+    padding: 0.75rem 3rem;
+    background: var(--info);
+    @include border-radius-item;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease-in;
+    &:hover {
+      box-shadow: 0 0px 6px -2px var(--text-primary);
+    }
+    margin-top: 1rem;
+  }
+  &__closeBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+  }
+  &__textBtn {
+    cursor: pointer;
+    margin: 0.5rem 0rem;
+    color: var(--text-secondary);
+    & > span {
+      color: var(--info);
+      margin-left: 0.25rem;
+    }
+  }
+}
+
+.logoutForm {
+  background: var(--bg-primary);
+  width: 300px;
+  padding: 2rem;
+  margin: 0 auto;
+  // FIX -- better style and structure
+  align-items: flex-start;
+  align-content: center;
+  h4 {
+    margin-bottom: 1rem;
+  }
+  p {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+    @include body-size;
+  }
+
+  &__actions {
+    width: 100%;
+    @include flex-end-row;
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  &__btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  &__btn--logout {
+    color: var(--error);
+  }
+
+  &__btn--cancel {
+    color: var(--info);
+  }
+
+  &__inputControl {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+
+    input {
+      color: red;
+      border: 2px solid red;
+    }
+    label {
+      @include sub-body-size;
+    }
+  }
+}
+
+.changeImgForm {
+  img {
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.changePassForm {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.deleteForm {
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  text-align: start;
+
+  h4 {
+    align-self: flex-start;
+    @include heading-size;
+  }
+
+  p {
+    color: var(--text-secondary);
+    @include body-size;
+    line-height: 1.5rem;
+    @include font-B;
+  }
+
+  &__actions {
+    width: 100%;
+    @include flex-end-row;
+    gap: 1rem;
+  }
+
+  &__inputControl {
+    border: 1px dotted var(--icon-err);
+    &.checked {
+      border: 1px dotted var(--icon-success);
+    }
+    cursor: pointer;
+    width: fit-content;
+    align-self: flex-start;
+    padding: 0.25rem;
+    label {
+      margin-left: 0.5rem;
+      cursor: pointer;
+    }
+  }
+}
+
+.deleteForm__btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  &--cancel {
+    color: var(--info);
+  }
+
+  &--delete {
+    color: var(--disable);
+    &.active {
+      color: var(--error);
+    }
+  }
+}

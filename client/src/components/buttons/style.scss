@@ -1,0 +1,190 @@
+@import "../../utilities";
+
+.btn {
+  margin-left: 2rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  i {
+    @include sub-heading-size;
+    color: var(--text-primary);
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+  svg {
+    min-width: 1.5rem;
+    height: auto;
+    fill: var(--text-primary);
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  & svg:active,
+  & i:active {
+    background: var(--bg-secondary);
+    // background: red;
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+}
+
+// ---------------------------------------------------------
+.profileBtn {
+  svg {
+    fill: var(--info);
+  }
+}
+// ---------------------------------------------------------
+.settingBtn {
+  margin-left: 0 !important;
+  i {
+    padding: 0.5rem;
+  }
+  & i:active {
+    background: var(--bg-primary);
+    @include border-radius-rounded;
+  }
+}
+
+// ---------------------------------------------------------
+.themeModeBtn {
+}
+// ---------------------------------------------------------
+.logoBtn {
+  margin-left: 0 !important;
+  svg {
+    width: 2.5rem;
+    @media (hover: hover) {
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+  h1 {
+    font-weight: bold;
+    color: var(--text-primary);
+    @include font-A;
+    @include heading-size;
+  }
+
+  i {
+    @include hero-size;
+  }
+
+  @include flex-center-row;
+  h1 {
+    font-weight: 700;
+  }
+}
+
+// --------------------------------------------
+
+.editBtn {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 30%;
+  cursor: pointer;
+}
+
+// --------------------------------------------------------
+.deleteBtn {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 44%;
+  cursor: pointer;
+}
+// --------------------------------------------------------
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+
+  i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    @include heading-size;
+  }
+}
+
+// --------------------------------------------
+
+.newPostBtn {
+  position: fixed;
+  @include flex-center-row;
+  z-index: 5;
+  bottom: 2.7rem;
+  right: 3%;
+  width: 3.5rem;
+  height: 3.5rem;
+  @include respond-to(md) {
+    height: 3rem;
+    width: 3rem;
+  }
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  @include border-radius-rounded;
+
+  svg {
+    fill: var(--text-primary);
+    width: inherit;
+    height: inherit;
+    @include border-radius-rounded;
+  }
+}
+
+// --------------------------------------------------------
+
+.userEditBtn {
+  background-color: transparent;
+  color: var(--info);
+  padding: 0.5rem;
+  cursor: pointer;
+  @include font-A;
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+// --------------------------------------------------------
+
+.backBtn {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  i,
+  span {
+    color: var(--text-primary);
+  }
+  span {
+    @include body-size;
+    margin-left: 0.5rem;
+  }
+  @include font-A;
+  &:hover {
+    opacity: 0.5;
+  }
+}

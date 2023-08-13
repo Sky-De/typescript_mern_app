@@ -1,0 +1,23 @@
+@import "utilities.scss";
+
+.App {
+  position: relative;
+  // FIX-- remove this
+  // border: 2px solid red;
+  // @include respond-to(sm) {
+  //   border: 2px solid rgb(156, 240, 0);
+  // }
+  // @include respond-to(md) {
+  //   border: 2px solid rgb(0, 204, 240);
+  // }
+  // @include respond-to(lg) {
+  //   border: 2px solid rgb(0, 64, 240);
+  // }
+  // @include respond-to(xl) {
+  //   border: 2px solid rgb(188, 0, 240);
+  // }
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  // FIX
+  min-height: 100vh;
+}

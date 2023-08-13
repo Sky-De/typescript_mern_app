@@ -1,0 +1,126 @@
+@import "../../utilities";
+
+.feedback {
+  // @include B;
+  .input {
+    height: 8rem;
+    &__control {
+      height: 100%;
+    }
+    &__item {
+      height: 100% !important;
+      padding: 0.5rem !important;
+      height: 100% !important;
+      border: none !important;
+    }
+  }
+  label {
+    @include font-B;
+    text-transform: lowercase !important;
+  }
+
+  width: 100%;
+  max-width: $content-max-width;
+
+  // @include B;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: $content-max-width;
+  &__title {
+    text-align: center;
+    @include heading-size;
+    margin: 1rem 0 3rem 0;
+    letter-spacing: 5px;
+  }
+  &__body {
+    display: grid;
+    padding: 0 1rem;
+    gap: 3rem;
+    grid-template-columns: 1;
+    @include respond-to(md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+  }
+  &__form {
+    height: 100% !important;
+    justify-self: center !important;
+    z-index: 3 !important;
+    max-width: 25rem !important;
+    gap: 3rem;
+    &--title {
+      @include sub-heading-size;
+    }
+
+    @include respond-to(md) {
+      width: 85% !important;
+    }
+  }
+  img {
+    width: 4rem !important;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  &__carousel {
+    width: inherit;
+    max-width: 35rem !important;
+  }
+
+  &__carousel--item {
+    padding: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    @include font-B;
+    // border: 1px solid rgb(87, 184, 12);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 70%;
+    margin: 0 auto;
+    @include border-radius-item;
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    & blockquote {
+      color: var(--text-primary);
+      @include body-size;
+      span {
+        @include body-size;
+        // @include hero-size;
+      }
+    }
+    & figcaption {
+      @include font-A(400);
+      span {
+        text-transform: capitalize;
+        display: block;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
+
+.control-arrow.control-next,
+.control-arrow.control-prev {
+  background: var(--bg-primary) !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+.carousel {
+  // border: 1px solid red !important;
+  // @include respond-to(md) {
+  //   width: 50% !important;
+  // }
+}
+.carousel-status {
+  display: none !important;
+}
+
+.carousel .control-prev.control-arrow:before {
+  border-right: 8px solid var(--text-primary) !important;
+}
+.carousel .control-next.control-arrow:before {
+  border-left: 8px solid var(--text-primary) !important;
+}
