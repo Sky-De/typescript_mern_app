@@ -11,6 +11,7 @@ export const getFeedbacks = createAsyncThunk(
     return data;
   }
 );
+
 // ------------------------------------------------------------------
 type SendFeedbackProps = {
   creatorId: string;

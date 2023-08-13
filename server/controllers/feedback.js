@@ -40,11 +40,6 @@ export const getFeedbacks = async (req, res, next) => {
 //@route POST /api/v1/feedback/create
 //@access users
 
-// creatorName: string;
-// creatorImgUrl: string;
-// createdAt: Date;
-// feedback: string;
-// _id: string;
 export const createFeedback = async (req, res, next) => {
   const { creatorId, feedback } = req.body;
   console.log(creatorId);

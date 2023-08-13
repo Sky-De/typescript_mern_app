@@ -20,6 +20,7 @@ type FeedbackState = {
 
 const FeedbackInitialState: FeedbackState = {
   feedbacks: [],
+
   getIsLoading: false,
   sendIsLoading: false,
   getError: null,
@@ -29,6 +30,7 @@ const FeedbackInitialState: FeedbackState = {
 const feedbackSlice = createSlice({
   name: "feedback",
   initialState: FeedbackInitialState,
+
   reducers: {
     resetFeedbackErrors(state) {
       state.getError = null;
@@ -45,6 +47,7 @@ const feedbackSlice = createSlice({
       getFeedbacks.fulfilled,
       (state, action: PayloadAction<Feedback[]>) => {
         state.getIsLoading = false;
+
         state.feedbacks = action.payload;
       }
     );
@@ -72,4 +75,5 @@ const feedbackSlice = createSlice({
 });
 
 export const { resetFeedbackErrors } = feedbackSlice.actions;
+
 export default feedbackSlice.reducer;

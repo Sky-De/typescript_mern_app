@@ -62,7 +62,6 @@
     object-fit: cover;
     border-radius: 50%;
   }
-
   &__carousel {
     width: inherit;
     max-width: 35rem !important;
@@ -101,7 +100,6 @@
     }
   }
 }
-
 .control-arrow.control-next,
 .control-arrow.control-prev {
   background: var(--bg-primary) !important;
