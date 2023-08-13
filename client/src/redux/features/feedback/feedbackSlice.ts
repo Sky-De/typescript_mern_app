@@ -36,7 +36,7 @@ const feedbackSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // ----------------------------------------getFeedbacks--
+    // ------------------------------------getFeedbacks--
     builder.addCase(getFeedbacks.pending, (state) => {
       state.getIsLoading = true;
       state.getError = null;
@@ -52,7 +52,7 @@ const feedbackSlice = createSlice({
       state.getIsLoading = false;
       state.getError = action.error.message || "Failed to register user";
     });
-    // ----------------------------------------sendFeedback--
+    // ------------------------------------sendFeedback--
     builder.addCase(sendFeedback.pending, (state) => {
       state.sendIsLoading = true;
       state.sendError = null;
