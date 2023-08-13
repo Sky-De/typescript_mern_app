@@ -25,11 +25,11 @@ const BookMarks = () => {
   });
 
   // userPosts
-  const incrasePageHandler = () => {
+  const incrasePageHandler = (): void => {
     if (bookMarks.currentPage >= totalPages) return;
     dispatch(incraseBookMarkPostsPage());
   };
-  const decrasePageHandler = () => {
+  const decrasePageHandler = (): void => {
     if (bookMarks.currentPage <= 1) return;
     dispatch(decraseBookMarkPostsPage());
   };

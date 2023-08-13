@@ -6,7 +6,7 @@ const BookDetails: FC = () => {
   const { selectedPost } = useAppSelectore((state) => state.post);
 
   return (
-    <article>
+    <article className="article">
       <BookCard {...selectedPost} />
     </article>
   );

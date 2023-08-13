@@ -11,6 +11,7 @@ import DelelteBtn from "../buttons/DelelteBtn";
 import PostStatus from "../postStatus/PostStatus";
 import axios from "axios";
 import { useTextLimiter } from "../../hooks/useTextLimiter";
+import { activeAlert } from "../../redux/features/alert/alertSlice";
 
 type IsProfile = {
   isProfile?: boolean;
@@ -38,10 +39,35 @@ const BookCard: FC<BookCardProps> = (props) => {
 
   const [isBookedMarked, setIsBookMarked] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [creatorInfo, setCreatorInfo] = useState({ name: "", imgUrl: "" });
+  const [creatorInfo, setCreatorInfo] = useState<{
+    name: string;
+    imgUrl: string;
+  }>({ name: "", imgUrl: "" });
 
-  const handleBookMark = () => dispatch(bookMarkPost(_id));
-  const handleLike = () => dispatch(likePost(_id));
+  const handleBookMark = () => {
+    if (!user) {
+      dispatch(
+        activeAlert({
+          type: "WARNING",
+          message: "You must login fist, tap login button!",
+        })
+      );
+      return;
+    }
+    dispatch(bookMarkPost(_id));
+  };
+  const handleLike = () => {
+    if (!user) {
+      dispatch(
+        activeAlert({
+          type: "WARNING",
+          message: "You must login first, tap login button!",
+        })
+      );
+      return;
+    }
+    dispatch(likePost(_id));
+  };
 
   useEffect(() => {
     if (user && likes && likes?.indexOf(user?._id) !== -1) setIsLiked(true);
@@ -116,11 +142,7 @@ const BookCard: FC<BookCardProps> = (props) => {
               {likes.length > 0 && likes.length.toLocaleString()}
             </span>
             {/* like------ */}
-            <button
-              disabled={!user}
-              onClick={handleLike}
-              className="card__action--like btn"
-            >
+            <button onClick={handleLike} className="card__action--like btn">
               <i
                 className={`bx ${isLiked ? "bxs-like" : "bx-like"} ${
                   user ? "" : "disable"
@@ -130,7 +152,6 @@ const BookCard: FC<BookCardProps> = (props) => {
             </button>
             {/* bookmark------ */}
             <button
-              disabled={!user}
               onClick={handleBookMark}
               className="card__action--bookMark btn"
             >
