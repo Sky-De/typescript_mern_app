@@ -1,20 +1,23 @@
-import "./style.scss";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
 import { useAppDispatch, useAppSelectore } from "../../hooks/reduxHooks";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import {
   getFeedbacks,
   sendFeedback,
 } from "../../redux/features/feedback/feedbackActionCreators";
+
+import { openModel } from "../../redux/features/model/modelSlice";
+import { activeAlert } from "../../redux/features/alert/alertSlice";
+import { resetFeedbackErrors } from "../../redux/features/feedback/feedbackSlice";
+
 import Avatar from "../../assets/icons/avatar.png";
 import Input from "../forms/Input";
 import SubmitBtn from "../buttons/SubmitBtn";
 import CircularLoading from "../loading/CircularLoading";
-import { openModel } from "../../redux/features/model/modelSlice";
-import { activeAlert } from "../../redux/features/alert/alertSlice";
-import { resetFeedbackErrors } from "../../redux/features/feedback/feedbackSlice";
 import ErrorMessage from "../Error/Error";
+
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "./style.scss";
 
 const FeedbacksCarousel: React.FC = () => {
   const { feedbacks, sendError, sendIsLoading, getIsLoading, getError } =
@@ -28,7 +31,6 @@ const FeedbacksCarousel: React.FC = () => {
   const submitHandler = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     // add form error state here --FIX
-    console.log(feedback);
     if (!user) {
       dispatch(
         activeAlert({
@@ -66,7 +68,11 @@ const FeedbacksCarousel: React.FC = () => {
             <CircularLoading />
           ) : (
             <>
-              <Carousel showThumbs={false} className="feedback__carousel">
+              <Carousel
+                showIndicators={false}
+                showThumbs={false}
+                className="feedback__carousel"
+              >
                 {feedbacks.map((feedback) => (
                   <figure
                     className="feedback__carousel--item"
