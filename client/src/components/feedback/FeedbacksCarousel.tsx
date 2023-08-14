@@ -69,6 +69,7 @@ const FeedbacksCarousel: React.FC = () => {
           ) : (
             <>
               <Carousel
+                swipeable={false}
                 showIndicators={false}
                 showThumbs={false}
                 className="feedback__carousel"
@@ -99,7 +100,6 @@ const FeedbacksCarousel: React.FC = () => {
               name="let me know"
               type="text-field"
               value={feedback}
-              focus
               changeHandler={changeHander}
             />
             <SubmitBtn
