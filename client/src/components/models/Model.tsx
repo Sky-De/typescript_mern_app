@@ -10,27 +10,59 @@ import ChangeImgForm from "../forms/userForms/ChangeImgForm";
 import DeleteAccountForm from "../forms/userForms/DeleteAccountForm";
 import { useCloseCleanModel } from "../../hooks/useCloseCleanModel";
 
-const AuthModel = () => {
-  const { type } = useAppSelectore((state) => state.model);
-  const closeModelHandler = useCloseCleanModel();
+// wrapper-----
+const PostFormCreateWrapper: React.FC = () => <PostForm isUpdate={false} />;
+const PostFormEditWrapper: React.FC = () => <PostForm isUpdate={true} />;
 
+// model content types-----
+type ModelComponent =
+  | typeof AuthForm
+  | typeof PostFormCreateWrapper
+  | typeof PostFormEditWrapper
+  | typeof BookDetails
+  | typeof DeleteAlert
+  | typeof ChangePassForm
+  | typeof ChangeNameForm
+  | typeof ChangeImgForm
+  | typeof DeleteAccountForm;
+
+export type ModelTypes =
+  | "AUTH"
+  | "SHOW"
+  | "POST_EDIT"
+  | "POST_CREATE"
+  | "POST_DELETE"
+  | "USER_PASS_EDIT"
+  | "USER_NAME_EDIT"
+  | "USER_IMG_EDIT"
+  | "USER_ACCOUNT_DELETE";
+
+//----------------------------------------------------
+const MODELS: Record<ModelTypes, ModelComponent> = {
+  AUTH: AuthForm,
+  POST_CREATE: PostFormCreateWrapper,
+  POST_EDIT: PostFormEditWrapper,
+  SHOW: BookDetails,
+  POST_DELETE: DeleteAlert,
+  USER_PASS_EDIT: ChangePassForm,
+  USER_NAME_EDIT: ChangeNameForm,
+  USER_IMG_EDIT: ChangeImgForm,
+  USER_ACCOUNT_DELETE: DeleteAccountForm,
+};
+
+const Model = () => {
+  const { type } = useAppSelectore((state) => state.model);
+  const CurrentModel = MODELS[type];
+  const closeModelHandler = useCloseCleanModel();
   const onClick = (e: React.MouseEvent): void => e.stopPropagation();
 
   return (
     <div className="model" onClick={closeModelHandler}>
       <div className="model__contentCon" onClick={onClick}>
-        {type === "AUTH" && <AuthForm />}
-        {type === "POST_CREATE" && <PostForm isUpdate={false} />}
-        {type === "POST_EDIT" && <PostForm isUpdate={true} />}
-        {type === "SHOW" && <BookDetails />}
-        {type === "POST_DELETE" && <DeleteAlert />}
-        {type === "USER_PASS_EDIT" && <ChangePassForm />}
-        {type === "USER_NAME_EDIT" && <ChangeNameForm />}
-        {type === "USER_IMG_EDIT" && <ChangeImgForm />}
-        {type === "USER_ACCOUNT_DELETE" && <DeleteAccountForm />}
+        {<CurrentModel />}
       </div>
     </div>
   );
 };
 
-export default AuthModel;
+export default Model;
