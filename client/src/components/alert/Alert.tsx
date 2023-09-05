@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelectore } from "../../hooks/reduxHooks";
 import { deactiveAlert } from "../../redux/features/alert/alertSlice";
 
 import "./style.scss";
+// refactore structure --FIX
 const Alert: FC = () => {
   const { isActive, message, type, duration } = useAppSelectore(
     (store) => store.alert
@@ -20,7 +21,10 @@ const Alert: FC = () => {
   }, [isActive]);
 
   return (
-    <div className={`alert ${isActive ? "active" : ""} ${type}`}>
+    <section
+      role="alert"
+      className={`alert ${isActive ? "active" : ""} ${type}`}
+    >
       <div className="alert__content">
         {type === "INFO" && <i className="bx bx-info-circle INFO"></i>}
         {type === "SUCCESS" && (
@@ -33,7 +37,7 @@ const Alert: FC = () => {
       <div onClick={deactiveMessageHandler} className="alert__action">
         x
       </div>
-    </div>
+    </section>
   );
 };
 
