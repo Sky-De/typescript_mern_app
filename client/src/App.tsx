@@ -11,10 +11,17 @@ import Nav from "./layout/nav/Nav";
 import Alert from "./components/alert/Alert";
 import NotFound from "./components/Error/NotFound";
 import "./App.scss";
+import { useLayoutEffect } from "react";
 
 const App: React.FC = () => {
   const { isDark } = useAppSelectore((state) => state.theme);
   const { isOpen: modelIsOpen } = useAppSelectore((state) => state.model);
+  useLayoutEffect(() => {
+    const rootElement = document.getElementById("root");
+    if (rootElement) {
+      rootElement.classList.remove("appLoading");
+    }
+  }, []);
 
   return (
     <div role="application" className={`App ${isDark ? "dark" : ""}`}>
