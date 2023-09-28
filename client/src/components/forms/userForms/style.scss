@@ -45,6 +45,21 @@
   }
 }
 
+.divider {
+  margin: 0.5rem 0;
+  width: 100%;
+  // border: 1px solid red;
+  display: flex;
+  align-items: center;
+  hr {
+    height: 1px;
+    width: 100%;
+  }
+  span {
+    margin: 0 0.5rem;
+  }
+}
+
 .logoutForm {
   background: var(--bg-primary);
   width: 300px;

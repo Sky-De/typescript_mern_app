@@ -113,7 +113,9 @@ const AuthForm: React.FC = () => {
           console.log("Login Failed");
         }}
       />
-      or
+      <div className="divider">
+        <hr /> <span>or</span> <hr />
+      </div>
       {isRegister && (
         <Input
           type="text"
