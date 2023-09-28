@@ -3,6 +3,7 @@ import {
   bookMarkPost,
   deleteUser,
   getVerifyEmail,
+  googleAuth,
   loginUser,
   logoutUser,
   registerUser,
@@ -81,6 +82,24 @@ const userSlice = createSlice({
       }
     );
     builder.addCase(registerUser.rejected, (state, action: ActionErrorType) => {
+      state.isLoading = false;
+      state.error = action.error.message || "Failed to register user";
+    });
+    // ----------------------------------------googleAuth--
+    // FIX--type for actions
+    builder.addCase(googleAuth.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+    builder.addCase(
+      googleAuth.fulfilled,
+      (state, action: PayloadAction<User>) => {
+        state.isLoading = false;
+        state.user = action.payload;
+        sessionStorage.setItem("user", JSON.stringify(state.user));
+      }
+    );
+    builder.addCase(googleAuth.rejected, (state, action: ActionErrorType) => {
       state.isLoading = false;
       state.error = action.error.message || "Failed to register user";
     });

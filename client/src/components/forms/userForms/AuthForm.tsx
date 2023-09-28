@@ -4,6 +4,7 @@ import {
   useRegisterFormValidator,
 } from "../../../hooks/formValidators";
 import {
+  googleAuth,
   loginUser,
   registerUser,
 } from "../../../redux/features/user/userActionCreators";
@@ -15,6 +16,9 @@ import SubmitBtn from "../../buttons/SubmitBtn";
 import { resetUserError } from "../../../redux/features/user/userSlice";
 import ErrorMessage from "../../Error/Error";
 import CloseBtn from "../../buttons/CloseBtn";
+
+import { GoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 type Form = {
   name: string;
@@ -93,13 +97,23 @@ const AuthForm: React.FC = () => {
   return (
     <form className="authForm" onSubmit={submitFormHandler}>
       <CloseBtn />
-
       <i
         className={`bx authForm__icon ${
           isRegister ? "bx-user-pin" : "bx-check-shield"
         }`}
       ></i>
-
+      <GoogleLogin
+        onSuccess={async (credentialResponse) => {
+          console.log(credentialResponse);
+          if (credentialResponse.credential) {
+            dispatch(googleAuth({ token: credentialResponse.credential }));
+          }
+        }}
+        onError={() => {
+          console.log("Login Failed");
+        }}
+      />
+      or
       {isRegister && (
         <Input
           type="text"
@@ -108,7 +122,6 @@ const AuthForm: React.FC = () => {
           value={formData.name}
         />
       )}
-
       <Input
         type="email"
         name="email"
@@ -121,7 +134,6 @@ const AuthForm: React.FC = () => {
         changeHandler={changeHandler}
         value={formData.password}
       />
-
       {isRegister && (
         <Input
           type="password"
@@ -130,12 +142,10 @@ const AuthForm: React.FC = () => {
           value={formData.repeatPassword}
         />
       )}
-
       <SubmitBtn
         isLoading={isLoading}
         tag={isRegister ? "register" : "login"}
       />
-
       {isRegister ? (
         <span className="authForm__textBtn" onClick={authTypeHandle}>
           Have an account already ? <span>Login</span>
@@ -145,7 +155,6 @@ const AuthForm: React.FC = () => {
           Don't have an account ? <span>Register</span>
         </span>
       )}
-
       {/* form validation Err */}
       {formErr.isError && <ErrorMessage errMessage={formErr.msg} />}
       {/* api response Err */}

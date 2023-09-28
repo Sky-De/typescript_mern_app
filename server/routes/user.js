@@ -13,6 +13,7 @@ import {
   updateUser,
   updateUserPassword,
   verifyUser,
+  googleAuth,
 } from "../controllers/user.js";
 
 const router = Router();
@@ -25,6 +26,7 @@ router.get("/:id/verify/email", sendVerifyEmail);
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
+router.post("/googleAuth", googleAuth);
 
 // ACTIONS
 router.put("/:id/update", userOwnerAuth, updateUser);

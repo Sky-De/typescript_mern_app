@@ -1,3 +1,5 @@
+import JWT from "jsonwebtoken";
+
 import bcrypt from "bcrypt";
 import UserModel from "../models/userModel.js";
 import PostModel from "../models/postModel.js";
@@ -35,10 +37,11 @@ export const registerUser = async (req, res, next) => {
       return next(new Error("This name is already taken!"));
     }
   } catch (err) {
+    console.log(err);
     res.status(500);
     return next(
       new Error(
-        "Some thing went wrong on registerUser/check existing user catch block!"
+        "Something went wrong on registerUser/check existing user catch block!"
       )
     );
   }
@@ -64,9 +67,10 @@ export const registerUser = async (req, res, next) => {
       .status(201)
       .json(userData);
   } catch (err) {
+    console.log(err);
     res.status(500);
     return next(
-      new Error("Some thing went wrong on registerUser/createUser catch block!")
+      new Error("Something went wrong on registerUser/createUser catch block!")
     );
   }
 };
@@ -112,6 +116,7 @@ export const loginUser = async (req, res, next) => {
       .status(200)
       .json(userData);
   } catch (err) {
+    console.log(err);
     res.status(500);
     return next(new Error("Some thing went wrong on loginUser catch block!"));
   }
@@ -133,8 +138,76 @@ export const logoutUser = async (req, res, next) => {
       .status(200)
       .json({ message: "User logout DONE!" });
   } catch (err) {
+    console.log(err);
     res.status(500);
     return next(new Error("Some thing went wrong on logoutUser catch block!"));
+  }
+};
+
+// ----------------------------------------------------------------------------------------------------logoutUser---
+//@desc googleAuth
+//@route POST api/v1/user/googleAuth
+//@access user
+
+export const googleAuth = async (req, res, next) => {
+  const { token } = req.body;
+  const decodedData = JWT.decode(token);
+  if (!decodedData) {
+    res.status(404);
+    return next(new Error("Wrong token!"));
+  }
+
+  const { sub, email, name, picture } = decodedData;
+
+  try {
+    const userExist = await UserModel.findOne({ googleId: sub });
+    if (userExist) {
+      const { password, lastMail, isAdmin, googleId, ...userData } =
+        userExist._doc;
+      const token = tokenGenerator({
+        id: userData._id,
+        isAdmin: isAdmin,
+        name: userData.name,
+      });
+      return res
+        .cookie("access_token", token, {
+          httpOnly: true,
+          sameSite: "none",
+          secure: true,
+        })
+        .status(200)
+        .json(userData);
+    } else {
+      const newUser = new UserModel({
+        googleId: sub,
+        isVerified: true,
+        name: name,
+        email: email,
+        imgUrl: picture,
+        password: "none",
+      });
+      await newUser.save();
+
+      const { password, lastMail, isAdmin, googleId, ...userData } =
+        newUser._doc;
+      const token = tokenGenerator({
+        id: userData._id,
+        isAdmin: isAdmin,
+        name: userData.name,
+      });
+      return res
+        .cookie("access_token", token, {
+          httpOnly: true,
+          sameSite: "none",
+          secure: true,
+        })
+        .status(200)
+        .json(userData);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500);
+    return next(new Error("Some thing went wrong on googleAuth catch block!"));
   }
 };
 
@@ -152,7 +225,8 @@ export const getPostOwnerInfo = async (req, res, next) => {
   try {
     const user = await UserModel.findById(id);
     SuccessResponse(res, { name: user.name, imgUrl: user.imgUrl });
-  } catch (error) {
+  } catch (err) {
+    console.log(err);
     res.status(500);
     return next(
       new Error("Some thing went wrong on getPostOwnerName catch block!")
@@ -168,7 +242,8 @@ export const getUsers = async (req, res, next) => {
   try {
     const users = await UserModel.find();
     SuccessResponse(res, users);
-  } catch (error) {
+  } catch (err) {
+    console.log(err);
     res.status(500);
     return next(new Error("Some thing went wrong on getUsers catch block!"));
   }
@@ -182,7 +257,6 @@ export const getUsers = async (req, res, next) => {
 export const updateUser = async (req, res, next) => {
   const newUser = req.body;
   const { id } = req.params;
-  console.log(id);
 
   // prevents updating isAdmin and password here
   if (newUser.isAdmin || newUser.password) {
@@ -203,7 +277,8 @@ export const updateUser = async (req, res, next) => {
     });
     const { isAdmin, lastMail, password, ...userData } = updatedUser._doc;
     CreatedResponse(res, userData);
-  } catch (error) {
+  } catch (err) {
+    console.log(err);
     res.status(500);
     return next(new Error("Some thing went wrong on updateUsers catch block!"));
   }
@@ -239,6 +314,7 @@ export const updateUserPassword = async (req, res, next) => {
     const { isAdmin, lastMail, password, ...userData } = updatedUser._doc;
     CreatedResponse(res, userData);
   } catch (err) {
+    console.log(err);
     res.status(500);
     return next(
       new Error("Some thing went wrong on updateUserPassword catch block!")
@@ -254,7 +330,6 @@ export const updateUserPassword = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
   try {
     const userExist = await UserModel.findById(req.userId);
-    console.log(userExist);
     if (!userExist) {
       res.status(404);
       return next(new Error("User not found!"));
@@ -266,13 +341,11 @@ export const deleteUser = async (req, res, next) => {
       return next(new Error("You are not allowed for this action."));
     }
 
-    console.log("here");
-
     await PostModel.deleteMany({ createdBy: req.userId });
     await UserModel.findByIdAndRemove(req.userId);
     return res.status(200).json({ message: "User deleted!" });
   } catch (err) {
-    console.log("here errr");
+    console.log(err);
     res.status(500);
     return next(new Error("Some thing went wrong on deleteUser catch block!"));
   }
@@ -305,6 +378,7 @@ export const bookMarkPost = async (req, res, next) => {
     const { password, isAdmin, ...userData } = updatedUser._doc;
     SuccessResponse(res, userData);
   } catch (err) {
+    console.log(err);
     res.status(500);
     return next(new Error("Some thing went wrong on deleteUser catch block!"));
   }
@@ -342,6 +416,7 @@ export const verifyUser = async (req, res, next) => {
     const { password, lastMail, isAdmin, ...userData } = updatedUser._doc;
     SuccessResponse(res, userData);
   } catch (err) {
+    console.log(err);
     res.status(500);
     return next(new Error("Some thing went wrong on verifyUser catch block!"));
   }
@@ -354,7 +429,6 @@ export const verifyUser = async (req, res, next) => {
 
 export const sendVerifyEmail = async (req, res, next) => {
   const { id } = req.params;
-  console.log("im here");
 
   try {
     const user = await UserModel.findById(id);
@@ -408,7 +482,6 @@ export const sendVerifyEmail = async (req, res, next) => {
       subject: "Verify Email",
       html: mail,
     };
-    console.log(message);
 
     transporter
       .sendMail(message)
@@ -417,12 +490,13 @@ export const sendVerifyEmail = async (req, res, next) => {
           .status(201)
           .json({ msg: "Verify code sended to your email!" });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
         res.status(500);
         return next(new Error("Something went wrong in sendMail catch block"));
       });
-  } catch (error) {
+  } catch (err) {
+    console.log(err);
     res.status(500);
     next(new Error("Something went wrong in sendVerifyEmail catch block"));
   }

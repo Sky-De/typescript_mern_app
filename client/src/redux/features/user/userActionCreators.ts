@@ -48,6 +48,28 @@ export const loginUser = createAsyncThunk(
 );
 
 // -------------------------------------------------------------------------------------------------------loginUser---
+type GoogleAuthProps = {
+  token: string;
+};
+export const googleAuth = createAsyncThunk(
+  "user/googleAuth",
+  async (token: GoogleAuthProps, { dispatch }) => {
+    console.log("token", token);
+
+    const { data } = await API.post("user/googleAuth", token);
+    dispatch(closeModel());
+    dispatch(
+      activeAlert({
+        type: "SUCCESS",
+        message: "You logged in with google successfully, Welcome Back!!",
+      })
+    );
+
+    return data;
+  }
+);
+
+// -------------------------------------------------------------------------------------------------------loginUser---
 
 export const logoutUser = createAsyncThunk(
   "user/logoutUser",
