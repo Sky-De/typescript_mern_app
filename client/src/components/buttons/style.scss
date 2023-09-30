@@ -1,6 +1,11 @@
 @import "../../utilities";
 
 .btn {
+  p {
+    // btn label
+    color: var(--text-primary);
+  }
+
   margin-left: 2rem;
   cursor: pointer;
   border: none;

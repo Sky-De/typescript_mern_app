@@ -4,14 +4,14 @@
   margin: auto;
 
   &__intro {
-    @include flex-end-center-row;
-    flex-direction: row-reverse;
-    align-items: center;
+    display: flex;
+    flex-direction: column-reverse;
     margin-bottom: 2rem;
     gap: 1rem;
     width: 100%;
     p {
       text-transform: capitalize;
+      margin-right: auto;
     }
   }
 

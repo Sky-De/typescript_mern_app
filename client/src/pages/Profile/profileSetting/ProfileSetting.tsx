@@ -8,6 +8,8 @@ import VerifyUser from "../../../components/verifyUser/verifyUser";
 import Avatar from "../../../assets/icons/avatar.png";
 import { activeAlert } from "../../../redux/features/alert/alertSlice";
 import BackBtn from "../../../components/buttons/BackBtn";
+import CircularLoading from "../../../components/loading/CircularLoading";
+import useTimeAgo from "../../../hooks/useTimeAgo";
 
 const ProfileSetting: React.FC = () => {
   const { user } = useAppSelectore((state) => state.user);
@@ -63,6 +65,22 @@ const ProfileSetting: React.FC = () => {
   }, [user, user?.isVerified, navigate]);
   // last navigate
 
+  const timeAgoPosted = useTimeAgo({ createdDate: user?.createdAt || "" });
+
+  const renderTimeAgo = (
+    timeAgo: { value: number; unit: string } | null
+  ): JSX.Element => {
+    if (timeAgo) {
+      return (
+        <span className="p">{` ${timeAgo.value} ${timeAgo.unit}${
+          timeAgo.value === 1 ? "" : "s"
+        } ago`}</span>
+      );
+    } else {
+      return <CircularLoading />;
+    }
+  };
+
   return (
     <main className="profileSetting">
       <h2>ProfileSetting</h2>
@@ -72,9 +90,22 @@ const ProfileSetting: React.FC = () => {
         {!user?.isVerified && <VerifyUser />}
 
         <div className="profileSetting__actions">
-          <div className="profileSetting__actions--joinedAt profileSettingItem">
-            <span>joined at</span>
-            <p>{user?.createdAt?.toString().slice(0, 16)}</p>
+          <div className="profileSetting__actions--avatar profileSettingItem">
+            <span>image</span>
+            <UserEditBtn name="Change" clickHandler={changeImgStartHandler} />
+            <img src={user?.imgUrl ? user?.imgUrl : Avatar} alt="user avatar" />
+          </div>
+
+          <div className="profileSetting__actions--name profileSettingItem">
+            <span>name</span>
+            <UserEditBtn name="Change" clickHandler={changeNameStartHandler} />
+            <p>{user?.name}</p>
+          </div>
+
+          <div className="profileSetting__actions--pass profileSettingItem">
+            <span>pass</span>
+            <UserEditBtn name="Change" clickHandler={changePassStartHandler} />
+            <p>* * * * * *</p>
           </div>
 
           <div className="profileSetting__actions--email profileSettingItem">
@@ -82,31 +113,10 @@ const ProfileSetting: React.FC = () => {
             <p>{user?.email}</p>
           </div>
 
-          <div className="profileSetting__actions--avatar profileSettingItem">
-            <span>image</span>
-            <UserEditBtn
-              name="Change Image"
-              clickHandler={changeImgStartHandler}
-            />
-            <img src={user?.imgUrl ? user?.imgUrl : Avatar} alt="user avatar" />
-          </div>
-
-          <div className="profileSetting__actions--name profileSettingItem">
-            <span>name</span>
-            <UserEditBtn
-              name="Change Name"
-              clickHandler={changeNameStartHandler}
-            />
-            <p>{user?.name}</p>
-          </div>
-
-          <div className="profileSetting__actions--pass profileSettingItem">
-            <span>pass</span>
-            <UserEditBtn
-              name="Change Pass"
-              clickHandler={changePassStartHandler}
-            />
-            <p>* * * * * *</p>
+          <div className="profileSetting__actions--joinedAt profileSettingItem">
+            <span>joined</span>
+            {/* <p>{user?.createdAt?.toString().slice(0, 16)}</p> */}
+            {renderTimeAgo(timeAgoPosted)}
           </div>
 
           <div className="profileSetting__actions--verified profileSettingItem">

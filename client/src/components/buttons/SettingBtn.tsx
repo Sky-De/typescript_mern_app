@@ -15,6 +15,7 @@ const SettingBtn: React.FC = () => {
       className="btn settingBtn"
     >
       <i className="bx bx-cog"></i>
+      <p>setting</p>
     </button>
   );
 };
