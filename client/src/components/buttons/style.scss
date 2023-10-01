@@ -145,12 +145,12 @@
   cursor: pointer;
   border: none;
   background: none;
-  color: var(--text-primary);
+  color: var(--info);
   background-color: var(--bg-primary);
   @include border-radius-rounded;
 
   svg {
-    fill: var(--text-primary);
+    fill: var(--info);
     width: inherit;
     height: inherit;
     @include border-radius-rounded;

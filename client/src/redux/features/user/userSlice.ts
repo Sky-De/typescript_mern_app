@@ -19,6 +19,7 @@ export type User = {
   email: string;
   bookMarks: string[];
   imgUrl?: string;
+  
   createdAt?: Date;
   updatedAt?: Date;
 };
