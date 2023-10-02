@@ -85,11 +85,12 @@ const PostForm: React.FC<{ isUpdate: boolean }> = ({ isUpdate }) => {
   return (
     <form className="authForm postForm" onSubmit={submitHandler}>
       <CloseBtn />
-      <i
-        className={`bx ${
-          isUpdate ? "bx-edit-alt" : "bx-book-add"
-        }  postForm__icon`}
-      ></i>
+      {isUpdate ? (
+        <i className={`bx bx-edit-alt postForm__icon`}></i>
+      ) : (
+        <h2 style={{ marginBottom: "1rem" }}>Create and share </h2>
+      )}
+
       <Input
         type="text"
         name="title"

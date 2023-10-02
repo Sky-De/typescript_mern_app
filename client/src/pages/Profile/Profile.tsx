@@ -30,10 +30,7 @@ const Profile: React.FC = () => {
   return (
     <main className="profile">
       <div className="profile__intro">
-        <div className="profile__intro--userAction">
-          <p title="User Name">{user?.name}</p>
-          <SettingBtn />
-        </div>
+        <SettingBtn />
         <BackBtn path="/" />
       </div>
       <div className="profile__tabs">

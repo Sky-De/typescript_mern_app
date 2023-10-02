@@ -56,7 +56,6 @@ export const getUserPosts = createAsyncThunk(
       postPerPage,
     });
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    console.log(data, "here");
 
     return data;
   }

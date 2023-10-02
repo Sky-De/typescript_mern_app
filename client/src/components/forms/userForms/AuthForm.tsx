@@ -18,7 +18,6 @@ import ErrorMessage from "../../Error/Error";
 import CloseBtn from "../../buttons/CloseBtn";
 
 import { GoogleLogin } from "@react-oauth/google";
-import axios from "axios";
 
 type Form = {
   name: string;

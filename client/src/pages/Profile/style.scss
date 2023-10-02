@@ -5,22 +5,14 @@
 
   &__intro {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: row-reverse;
+    justify-content: space-between;
     margin-bottom: 2rem;
     gap: 1rem;
     width: 100%;
     p {
       text-transform: capitalize;
       margin-right: auto;
-    }
-  }
-
-  &__intro--userAction {
-    @include flex-end-center-row;
-    gap: 1rem;
-    width: 100%;
-    p {
-      text-transform: capitalize;
     }
   }
 

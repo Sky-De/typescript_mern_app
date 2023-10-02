@@ -69,6 +69,8 @@ const FeedbacksCarousel: React.FC = () => {
           ) : (
             <>
               <Carousel
+                autoPlay
+                infiniteLoop
                 swipeable={false}
                 showIndicators={false}
                 showThumbs={false}
