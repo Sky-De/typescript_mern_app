@@ -54,7 +54,7 @@ type GoogleAuthProps = {
 export const googleAuth = createAsyncThunk(
   "user/googleAuth",
   async (token: GoogleAuthProps, { dispatch }) => {
-    console.log("token", token);
+    // console.log("token", token);
 
     const { data } = await API.post("user/googleAuth", token);
     dispatch(closeModel());
@@ -75,7 +75,7 @@ export const logoutUser = createAsyncThunk(
   "user/logoutUser",
   async (_, { dispatch }) => {
     const { data } = await API.post("user/logout");
-    console.log(data);
+    // console.log(data);
     dispatch(closeModel());
     dispatch(
       activeAlert({ type: "INFO", message: "You logged out successfully" })
@@ -103,7 +103,7 @@ export const updateUser = createAsyncThunk(
       activeAlert({ type: "SUCCESS", message: "User updated successfully" })
     );
 
-    console.log(data);
+    // console.log(data);
 
     return data;
   }
@@ -128,8 +128,8 @@ export const updateUserPass = createAsyncThunk(
         message: "Your password updated successfully",
       })
     );
-    console.log("clode model");
-    console.log(data);
+    // console.log("clode model");
+    // console.log(data);
 
     return data;
   }
@@ -150,7 +150,7 @@ export const deleteUser = createAsyncThunk(
       })
     );
     dispatch(closeModel());
-    console.log(data);
+    // console.log(data);
 
     return data;
   }
@@ -162,7 +162,7 @@ export const bookMarkPost = createAsyncThunk(
   "user/bookMarkPost",
   async (id: string) => {
     const { data } = await API.patch(`user/${id}/bookmark`);
-    console.log(data);
+    // console.log(data);
 
     return data;
   }
@@ -186,7 +186,7 @@ export const verifyUser = createAsyncThunk(
       })
     );
 
-    console.log(data);
+    // console.log(data);
 
     return data;
   }
@@ -198,7 +198,7 @@ export const getVerifyEmail = createAsyncThunk(
   "user/getVerifyEmail",
   async (id: string, { dispatch }) => {
     const { data } = await API.get(`user/${id}/verify/email`);
-    console.log(data, "data crator");
+    // console.log(data, "data crator");
 
     dispatch(
       activeAlert({
