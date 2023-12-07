@@ -1,25 +1,18 @@
-import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelectore } from "../../../hooks/reduxHooks";
 import { deleteUser } from "../../../redux/features/user/userActionCreators";
 import CircularLoading from "../../loading/CircularLoading";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { resetUserError } from "../../../redux/features/user/userSlice";
 import { useCloseCleanModel } from "../../../hooks/useCloseCleanModel";
 import ErrorMessage from "../../Error/Error";
 
 const DeleteAccountForm = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const {
     isLoading,
     error: userError,
     user,
   } = useAppSelectore((state) => state.user);
-
-  useEffect(() => {
-    if (!user) navigate("/");
-  }, [user, navigate]);
-  // last navigate
+  const dispatch = useAppDispatch();
 
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const closeCleaneModel = useCloseCleanModel();

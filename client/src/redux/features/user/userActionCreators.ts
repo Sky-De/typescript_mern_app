@@ -142,9 +142,6 @@ type DeleteUserProps = {
 export const deleteUser = createAsyncThunk(
   "user/deleteUser",
   async ({ id }: DeleteUserProps, { dispatch }) => {
-    console.log(id);
-    console.log("id useraction");
-
     const { data } = await API.delete(`user/${id}/delete`);
     dispatch(
       activeAlert({

@@ -16,6 +16,11 @@ const ProfileSetting: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    if (!user) navigate("/");
+  }, [user, navigate]);
+  // last navigate
+
   const changePassStartHandler = () => {
     if (user?.isVerified) return dispatch(openModel("USER_PASS_EDIT"));
     else
@@ -60,26 +65,21 @@ const ProfileSetting: React.FC = () => {
       );
   };
 
-  useEffect(() => {
-    if (!user) navigate("/");
-  }, [user, user?.isVerified, navigate]);
-  // last navigate
+  // const timeAgoPosted = useTimeAgo({ createdDate: user?.createdAt || "" });
 
-  const timeAgoPosted = useTimeAgo({ createdDate: user?.createdAt || "" });
-
-  const renderTimeAgo = (
-    timeAgo: { value: number; unit: string } | null
-  ): JSX.Element => {
-    if (timeAgo) {
-      return (
-        <span className="p">{` ${timeAgo.value} ${timeAgo.unit}${
-          timeAgo.value === 1 ? "" : "s"
-        } ago`}</span>
-      );
-    } else {
-      return <CircularLoading />;
-    }
-  };
+  // const renderTimeAgo = (
+  //   timeAgo: { value: number; unit: string } | null
+  // ): JSX.Element => {
+  //   if (timeAgo) {
+  //     return (
+  //       <span className="p">{` ${timeAgo.value} ${timeAgo.unit}${
+  //         timeAgo.value === 1 ? "" : "s"
+  //       } ago`}</span>
+  //     );
+  //   } else {
+  //     return <CircularLoading />;
+  //   }
+  // };
 
   return (
     <main className="profileSetting">
@@ -113,11 +113,11 @@ const ProfileSetting: React.FC = () => {
             <p>{user?.email}</p>
           </div>
 
-          <div className="profileSetting__actions--joinedAt profileSettingItem">
-            <span>joined</span>
-            {/* <p>{user?.createdAt?.toString().slice(0, 16)}</p> */}
-            {renderTimeAgo(timeAgoPosted)}
-          </div>
+          {/* <div className="profileSetting__actions--joinedAt profileSettingItem">
+            <span>joined</span> */}
+          {/* <p>{user?.createdAt?.toString().slice(0, 16)}</p> */}
+          {/* {renderTimeAgo(timeAgoPosted)}
+          </div> */}
 
           <div className="profileSetting__actions--verified profileSettingItem">
             <span>verified</span>
