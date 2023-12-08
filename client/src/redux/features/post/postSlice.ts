@@ -253,7 +253,7 @@ const postSlice = createSlice({
       state.allPosts.error = null;
     });
     builder.addCase(likePost.fulfilled, (state, action: PayloadAction<any>) => {
-      console.log(action.payload);
+      // console.log(action.payload);
 
       state.allPosts.isLoading = false;
       state.allPosts.posts = state.allPosts.posts.map((post) =>

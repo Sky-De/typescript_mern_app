@@ -75,7 +75,7 @@ export const logoutUser = createAsyncThunk(
   "user/logoutUser",
   async (_, { dispatch }) => {
     const { data } = await API.post("user/logout");
-    console.log(data);
+    // console.log(data);
     dispatch(closeModel());
     dispatch(
       activeAlert({ type: "INFO", message: "You logged out successfully" })
@@ -103,7 +103,7 @@ export const updateUser = createAsyncThunk(
       activeAlert({ type: "SUCCESS", message: "User updated successfully" })
     );
 
-    console.log(data);
+    // console.log(data);
 
     return data;
   }
@@ -128,8 +128,8 @@ export const updateUserPass = createAsyncThunk(
         message: "Your password updated successfully",
       })
     );
-    console.log("clode model");
-    console.log(data);
+    // console.log("clode model");
+    // console.log(data);
 
     return data;
   }
@@ -142,9 +142,12 @@ type DeleteUserProps = {
 export const deleteUser = createAsyncThunk(
   "user/deleteUser",
   async ({ id }: DeleteUserProps, { dispatch }) => {
+<<<<<<< HEAD
     // console.log(id);
     // console.log("id useraction");
 
+=======
+>>>>>>> 686d63091749b909e09fadbf4e24a7d7310601cb
     const { data } = await API.delete(`user/${id}/delete`);
     dispatch(
       activeAlert({
@@ -153,7 +156,7 @@ export const deleteUser = createAsyncThunk(
       })
     );
     dispatch(closeModel());
-    console.log(data);
+    // console.log(data);
 
     return data;
   }
@@ -165,7 +168,7 @@ export const bookMarkPost = createAsyncThunk(
   "user/bookMarkPost",
   async (id: string) => {
     const { data } = await API.patch(`user/${id}/bookmark`);
-    console.log(data);
+    // console.log(data);
 
     return data;
   }
@@ -189,7 +192,7 @@ export const verifyUser = createAsyncThunk(
       })
     );
 
-    console.log(data);
+    // console.log(data);
 
     return data;
   }
@@ -201,7 +204,7 @@ export const getVerifyEmail = createAsyncThunk(
   "user/getVerifyEmail",
   async (id: string, { dispatch }) => {
     const { data } = await API.get(`user/${id}/verify/email`);
-    console.log(data, "data crator");
+    // console.log(data, "data crator");
 
     dispatch(
       activeAlert({
