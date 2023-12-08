@@ -1,8 +1,14 @@
 @import "../../utilities";
 .footer {
-  z-index: 4;
+  background: #000;
+  z-index: 5;
   min-height: $footer-hight-mobile;
   max-height: $footer-hight-mobile;
+  @include respond-to(lg) {
+    min-height: $footer-hight-desktop;
+    max-height: $footer-hight-desktop;
+  }
+
   background: var(--bg-primary);
   color: var(--text-primary);
   box-shadow: 0px 0px 20px -15px var(--text-primary);

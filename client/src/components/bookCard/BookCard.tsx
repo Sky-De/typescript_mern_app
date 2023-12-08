@@ -1,3 +1,4 @@
+import React from "react";
 import "./style.scss";
 import bookCover from "../../assets/images/book-cover-min.jpg";
 import { FC, useEffect, useState } from "react";

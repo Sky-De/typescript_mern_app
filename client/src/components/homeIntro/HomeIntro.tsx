@@ -53,12 +53,14 @@ const data = [
 const HomeIntro = () => {
   return (
     <section className="homeIntro" role="banner" aria-label="home intro">
-      <img
-        className="homeIntro__img"
-        src={IntroCover}
-        alt="Home intro"
-        title="SVG belongs to https://storyset.com/"
-      />
+      <div className="homeIntro__imgCon">
+        <img
+          className="homeIntro__img"
+          src={IntroCover}
+          alt="Home intro"
+          title="SVG belongs to https://storyset.com/"
+        />
+      </div>
       <div className="homeIntro__content">
         <h2 className="homeIntro__content--title">MERN APPLICATION</h2>
         <a

@@ -54,7 +54,7 @@ type GoogleAuthProps = {
 export const googleAuth = createAsyncThunk(
   "user/googleAuth",
   async (token: GoogleAuthProps, { dispatch }) => {
-    console.log("token", token);
+    // console.log("token", token);
 
     const { data } = await API.post("user/googleAuth", token);
     dispatch(closeModel());
@@ -142,8 +142,8 @@ type DeleteUserProps = {
 export const deleteUser = createAsyncThunk(
   "user/deleteUser",
   async ({ id }: DeleteUserProps, { dispatch }) => {
-    console.log(id);
-    console.log("id useraction");
+    // console.log(id);
+    // console.log("id useraction");
 
     const { data } = await API.delete(`user/${id}/delete`);
     dispatch(

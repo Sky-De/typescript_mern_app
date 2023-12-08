@@ -1,17 +1,23 @@
 @import "../../utilities";
 
 .homeIntro {
+  z-index: 5;
   @include content-max-width;
   // FIX
-  min-height: calc(100vh - $header-hight-mobile - $footer-hight-mobile - 4rem);
+  min-height: calc(
+    100vh - $header-hight-mobile - $footer-hight-mobile - $nav-hight
+  );
+  max-height: calc(
+    100vh - $header-hight-mobile - $footer-hight-mobile - $nav-hight
+  );
   @include widescreen {
     min-height: calc(
-      100vh - $header-hight-mobile - $footer-hight-mobile - 4rem
+      100vh - $header-hight-mobile - $footer-hight-mobile - $nav-hight
     );
   }
   @include tallscreen {
     min-height: calc(
-      100vh - $header-hight-mobile - $footer-hight-mobile - 4rem
+      100vh - $header-hight-mobile - $footer-hight-mobile - $nav-hight
     );
   }
   padding: 0 2rem;
@@ -22,7 +28,7 @@
   justify-content: space-evenly;
   align-items: center;
 
-  @include respond-to(lg) {
+  @include respond-to(md) {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -42,7 +48,7 @@
     animation: fadeUp 0.6s 0.4s ease;
     animation-fill-mode: forwards;
 
-    @include respond-to(lg) {
+    @include respond-to(md) {
       padding: 10rem 0;
     }
 
@@ -58,13 +64,20 @@
       color: var(--text-secondary);
       @include font-B;
       @include body-size;
-      @include respond-to(lg) {
+      @include respond-to(md) {
         display: block;
       }
     }
   }
 
   &__content--techList {
+    list-style: none;
+    @include respond-to(md) {
+      list-style: disc;
+      border-right: 1px dotted;
+      border-bottom: 1px dotted;
+    }
+    background-color: var(--bg-secondary);
     width: 100%;
     margin-left: 1rem;
     padding: 1rem 0;
@@ -99,6 +112,18 @@
     }
   }
 
+  &__imgCon {
+    @media screen and (min-width: 0px) and (max-width: 400px) {
+      width: 100%;
+    }
+    @media screen and (min-width: 401px) {
+      width: 60%;
+    }
+    @media screen and (min-width: 600px) {
+      width: 50%;
+    }
+  }
+
   &__img {
     width: 100%;
     // for animatioin
@@ -107,9 +132,6 @@
     animation-fill-mode: forwards;
     @include respond-to(lg) {
       align-self: flex-start;
-    }
-    @include respond-to(md) {
-      width: 45%;
     }
   }
 }

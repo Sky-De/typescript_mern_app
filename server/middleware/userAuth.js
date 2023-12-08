@@ -5,7 +5,6 @@ import {
   ExpiredTokenResponse,
   ForbiddenResponse,
   NotFoundResponse,
-  SuccessResponse,
   mongooseIdValidator,
   tokenDecoder,
 } from "../funcs/index.js";
