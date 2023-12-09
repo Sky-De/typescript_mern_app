@@ -9,6 +9,8 @@ export type ModelTypes =
   | "USER_PASS_EDIT"
   | "USER_NAME_EDIT"
   | "USER_IMG_EDIT"
+  | "FRONT_END"
+  | "BACK_END"
   | "USER_ACCOUNT_DELETE";
 
 type ModelState = {

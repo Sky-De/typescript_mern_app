@@ -1,6 +1,8 @@
 import Details from "./Details";
 import IntroCover from "../../assets/svg/BookLover.svg";
 import "./style.scss";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { openModel } from "../../redux/features/model/modelSlice";
 
 const REPOSITORY_URL = "https://github.com/Sky-De/typescript_mern_app";
 
@@ -51,6 +53,7 @@ const data = [
 ];
 
 const HomeIntro = () => {
+  const dispatch = useAppDispatch();
   return (
     <section className="homeIntro" role="banner" aria-label="home intro">
       <div className="homeIntro__imgCon">
@@ -72,7 +75,6 @@ const HomeIntro = () => {
           <span>Github source code link</span>
           <i className="bx bxl-github footer__link--icon"></i>
         </a>
-        {/* FIX  replace lorem*/}
         <p>
           Discover my React MEARN app ( client TypeScript / server JavaScript )
           - CRUD operations, user auth, and posts management. Enjoy real-time
@@ -81,9 +83,18 @@ const HomeIntro = () => {
           Build interactive, responsive user interfaces with ease.
         </p>
         <ul className="homeIntro__content--techList">
-          {data.map((item) => (
-            <Details key={item.id} title={item.title} techs={item.techs} />
-          ))}
+          <h3
+            className="techItem__title"
+            onClick={() => dispatch(openModel("FRONT_END"))}
+          >
+            # FrontEnd
+          </h3>
+          <h3
+            className="techItem__title"
+            onClick={() => dispatch(openModel("BACK_END"))}
+          >
+            # BackEnd
+          </h3>
         </ul>
       </div>
     </section>

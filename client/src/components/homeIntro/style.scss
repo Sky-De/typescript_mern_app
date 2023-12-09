@@ -71,12 +71,6 @@
   }
 
   &__content--techList {
-    list-style: none;
-    @include respond-to(md) {
-      list-style: disc;
-      border-right: 1px dotted;
-      border-bottom: 1px dotted;
-    }
     background-color: var(--bg-secondary);
     width: 100%;
     margin-left: 1rem;
@@ -140,6 +134,7 @@
   cursor: pointer;
 
   &__title {
+    cursor: pointer;
     @include heading-size;
     @include respond-to(xl) {
       @include body-size;
@@ -147,21 +142,24 @@
     &:hover {
       color: var(--info);
     }
+    &--colored {
+      color: var(--info);
+    }
   }
 
   &__list {
     list-style: "-  ";
+    columns: 2;
+    @include respond-to(md) {
+      columns: 3;
+    }
+    background-color: var(--bg-secondary);
+    width: 90vw;
     transition: all 0.3s ease-out;
-    max-height: 0;
     overflow: scroll;
-    padding: 0rem 1rem;
+    padding: 1rem 2rem;
     @include font-B;
     color: var(--text-secondary);
-
-    &.active {
-      max-height: 100vh;
-      padding: 0.5rem 1rem;
-    }
   }
 
   &__list--item {
