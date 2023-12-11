@@ -133,12 +133,13 @@
 .newPostBtn {
   position: fixed;
   @include flex-center-row;
-  z-index: 5;
-  bottom: 2.7rem;
+  z-index: 7;
   right: 3%;
+  bottom: 2.7rem;
   width: 3.5rem;
   height: 3.5rem;
-  @include respond-to(md) {
+  @include respond-to(lg) {
+    bottom: 1.5rem;
     height: 3rem;
     width: 3rem;
   }
