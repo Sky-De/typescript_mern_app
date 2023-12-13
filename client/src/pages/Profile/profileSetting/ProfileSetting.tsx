@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import "./style.scss";
+import { useNavigate } from "react-router-dom";
 import UserEditBtn from "../../../components/buttons/UserEditBtn";
 import { useAppDispatch, useAppSelectore } from "../../../hooks/reduxHooks";
 import { openModel } from "../../../redux/features/model/modelSlice";
@@ -8,8 +8,6 @@ import VerifyUser from "../../../components/verifyUser/verifyUser";
 import Avatar from "../../../assets/icons/avatar.png";
 import { activeAlert } from "../../../redux/features/alert/alertSlice";
 import BackBtn from "../../../components/buttons/BackBtn";
-import CircularLoading from "../../../components/loading/CircularLoading";
-import useTimeAgo from "../../../hooks/useTimeAgo";
 
 const ProfileSetting: React.FC = () => {
   const { user } = useAppSelectore((state) => state.user);
@@ -65,22 +63,6 @@ const ProfileSetting: React.FC = () => {
       );
   };
 
-  // const timeAgoPosted = useTimeAgo({ createdDate: user?.createdAt || "" });
-
-  // const renderTimeAgo = (
-  //   timeAgo: { value: number; unit: string } | null
-  // ): JSX.Element => {
-  //   if (timeAgo) {
-  //     return (
-  //       <span className="p">{` ${timeAgo.value} ${timeAgo.unit}${
-  //         timeAgo.value === 1 ? "" : "s"
-  //       } ago`}</span>
-  //     );
-  //   } else {
-  //     return <CircularLoading />;
-  //   }
-  // };
-
   return (
     <main className="profileSetting">
       <h2>ProfileSetting</h2>
@@ -112,12 +94,6 @@ const ProfileSetting: React.FC = () => {
             <span>email</span>
             <p>{user?.email}</p>
           </div>
-
-          {/* <div className="profileSetting__actions--joinedAt profileSettingItem">
-            <span>joined</span> */}
-          {/* <p>{user?.createdAt?.toString().slice(0, 16)}</p> */}
-          {/* {renderTimeAgo(timeAgoPosted)}
-          </div> */}
 
           <div className="profileSetting__actions--verified profileSettingItem">
             <span>verified</span>

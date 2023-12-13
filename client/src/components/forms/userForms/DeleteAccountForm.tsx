@@ -43,6 +43,7 @@ const DeleteAccountForm = () => {
           type="checkbox"
           name="box"
           checked={isChecked}
+          id="box"
         />
         <label htmlFor="box">Yes, i'm SURE !!</label>
       </div>
