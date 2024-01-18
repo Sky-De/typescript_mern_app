@@ -146,6 +146,9 @@ git clone https://github.com/Sky-De/typescript_mern_app
 # Change directory
 cd your-repo-name
 
+# Add .env variables
+check .env.example
+
 # Install dependencies
 npm install
 
