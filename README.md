@@ -144,7 +144,8 @@ Provided step-by-step instructions on how to install and run this project locall
 git clone https://github.com/Sky-De/typescript_mern_app
 
 # Change directory
-cd your-repo-name
+cd client
+cd server
 
 # Add .env variables
 check .env.example
