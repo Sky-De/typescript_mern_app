@@ -62,7 +62,7 @@ Take a look at the live project deployed on Netlify
 
 ## Preview
 
-**DESKTOP  --------------------------------------------------------------------------**
+** ------------------------------------- DESKTOP  -------------------------------------**
 
 <img src="https://github.com/Sky-De/typescript_mern_app/assets/79264045/ed9e0b88-5124-4cfc-914c-200ee68bf0cd" width="80%">
 
@@ -75,7 +75,7 @@ Take a look at the live project deployed on Netlify
 <img src="https://github.com/Sky-De/typescript_mern_app/assets/79264045/ac46e953-e4c4-4ee1-b6f3-e1038f58b839" width="80%">
 
 
-**Mobile --------------------------------------------------------------------------**
+** -------------------------------------- Mobile ------------------------------------**
 
 <img src="https://github.com/Sky-De/typescript_mern_app/assets/79264045/227396df-22e5-454c-983e-067e5bb365bd" width="270">
 <img src="https://github.com/Sky-De/typescript_mern_app/assets/79264045/3968a582-1391-402b-bfd6-e2fd3da4aec2" width="270">
