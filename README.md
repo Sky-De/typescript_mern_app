@@ -90,26 +90,26 @@ BookShare is a MERN (MongoDB, Express.js, React, Node.js) TypeScript application
 ![line]
 
 ## Instruction
-**Authentication :**
+- **Authentication :**
 Users can sign up and log in using either their email or Google authentication.
 Email authentication includes a verification step, requiring users to confirm their email address through a registration code sent to their inbox.
 
-**User Interaction :**
+- **User Interaction :**
 Users can explore and engage with posts created by others.
 Features include the ability to like and bookmark posts.
 Users can create new posts and manage their own posts by editing or deleting them.
 
-**Profile Management :**
+- **Profile Management :**
 Each user has a dedicated profile page, showcasing their posts and bookmarked content.
 Profile settings enable users to view and update personal information, including their name and profile image.
 
-**Server-Side Pagination :**
+- **Server-Side Pagination :**
 The application employs server-side pagination, fetching 10 posts per request to optimize performance.
 
-**Feedback Section :**
+- **Feedback Section :**
 A dedicated section allows users to provide feedback or read comments from others.
 
-**Dark and Light Mode :**
+- **Dark and Light Mode :**
 BookShare caters to user preferences by offering both dark and light mode options for a personalized visual experience.
 
 ![line]
