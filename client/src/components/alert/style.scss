@@ -47,12 +47,13 @@
     @include flex-center-row;
     gap: 0.3rem;
     i,
-    h6 {
+    p {
       color: var(--text-primary);
     }
-    h6 {
+    p {
       @include sub-body-size;
       margin-left: 1rem;
+      font-weight: bold;
     }
     i {
       @include sub-heading-size;

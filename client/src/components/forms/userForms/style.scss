@@ -1,9 +1,8 @@
 @import "../../../utilities";
 
 .authForm {
-  border: 2px solid red;
   max-height: 100vh;
-  @include respond-to(lg){
+  @include respond-to(lg) {
     padding: 0.5rem 3rem;
   }
   overflow: scroll;

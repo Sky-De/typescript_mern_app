@@ -32,7 +32,7 @@ const Alert: FC = () => {
         )}
         {type === "FAILD" && <i className="bx bx-shield-minus FAILD"></i>}
         {type === "WARNING" && <i className="bx bx-error WARNING"></i>}
-        <h6>{message}</h6>
+        <p>{message}</p>
       </div>
       <div onClick={deactiveMessageHandler} className="alert__action">
         x

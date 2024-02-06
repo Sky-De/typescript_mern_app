@@ -19,7 +19,11 @@ const NewPostBtn: React.FC = () => {
 
   const newPostHandler = () => dispatch(openModel("POST_CREATE"));
   return (
-    <button onClick={newPostHandler} className="newPostBtn">
+    <button
+      onClick={newPostHandler}
+      className="newPostBtn"
+      aria-label="create new post btn"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

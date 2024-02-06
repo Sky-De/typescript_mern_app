@@ -31,7 +31,7 @@ const Pagination: FC<PaginationProps> = (props) => {
 
   return (
     <>
-      <ul className="pagination">
+      <div className="pagination">
         <i onClick={decrasePageHandler} className="bx bxs-chevron-left"></i>
         {pagesArray.map((item) => (
           <PaginationItem
@@ -42,7 +42,7 @@ const Pagination: FC<PaginationProps> = (props) => {
           />
         ))}
         <i onClick={incrasePageHandler} className="bx bxs-chevron-right"></i>
-      </ul>
+      </div>
       {isLoading && <CircularLoading size="small" />}
     </>
   );

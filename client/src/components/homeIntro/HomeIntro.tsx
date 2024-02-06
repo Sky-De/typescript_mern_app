@@ -36,18 +36,18 @@ const HomeIntro = () => {
           Build interactive, responsive user interfaces with ease.
         </p>
         <ul className="homeIntro__content--techList">
-          <h3
+          <li
             className="techItem__title"
             onClick={() => dispatch(openModel("FRONT_END"))}
           >
             # FrontEnd
-          </h3>
-          <h3
+          </li>
+          <li
             className="techItem__title"
             onClick={() => dispatch(openModel("BACK_END"))}
           >
             # BackEnd
-          </h3>
+          </li>
         </ul>
       </div>
     </section>

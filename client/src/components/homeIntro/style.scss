@@ -61,7 +61,7 @@
       margin: 1rem 0;
       line-height: 1.4rem;
       display: none;
-      color: var(--text-secondary);
+      color: var(--text-intro);
       @include font-B;
       @include body-size;
       @include respond-to(md) {
@@ -71,6 +71,7 @@
   }
 
   &__content--techList {
+    list-style: none;
     background-color: var(--bg-secondary);
     width: 100%;
     padding: 1rem 0;
@@ -133,6 +134,7 @@
   cursor: pointer;
 
   &__title {
+    font-weight: bold;
     cursor: pointer;
     @include heading-size;
     @include respond-to(xl) {

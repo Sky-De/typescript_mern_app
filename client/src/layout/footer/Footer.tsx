@@ -6,6 +6,7 @@ const Footer: React.FC = () => {
     <footer className="footer">
       <h3>SkyDe</h3>
       <NavLink
+        aria-label="linkedin link"
         className="footer__link btn"
         target="_blank"
         to="https://www.linkedin.com/in/sky-de-763248228"
@@ -22,6 +23,7 @@ const Footer: React.FC = () => {
         }
       />
       <NavLink
+        aria-label="github link"
         className="footer__link btn"
         target="_blank"
         to="https://github.com/Sky-De"
@@ -43,6 +45,7 @@ const Footer: React.FC = () => {
         }
       />
       <NavLink
+        aria-label="twitter link"
         className="footer__link btn"
         target="_blank"
         to="https://twitter.com/SkyDe1991?t=b2SJxGA4wmHwwgxDUUtE8Q&s=09"
@@ -59,6 +62,7 @@ const Footer: React.FC = () => {
         }
       />
       <a
+        aria-label="email"
         className="footer__link btn"
         target="_blank"
         rel="noreferrer"

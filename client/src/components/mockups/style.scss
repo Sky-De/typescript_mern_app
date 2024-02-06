@@ -1,0 +1,35 @@
+.frame{
+    background: #000!important;
+    fill: none;
+}
+
+.frame__mobile{
+    border: 2px solid red;
+    &--con{
+    width: 30%;
+    height: 10%;
+    }
+    &--item{
+
+    }
+}
+.frame__laptop{
+    border: 2px solid red;
+    &--con{
+    width: 80%;
+    height: 60%;
+    }
+    &--item{
+
+    }
+}
+.frame__tablet{
+    border: 2px solid red;
+    &--con{
+    width: 50%;
+    height: 60%;
+    }
+    &--item{
+
+    }
+}
