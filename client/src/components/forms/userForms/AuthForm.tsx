@@ -103,7 +103,7 @@ const AuthForm: React.FC = () => {
       ></i>
       <GoogleLogin
         onSuccess={async (credentialResponse) => {
-          console.log(credentialResponse);
+          // console.log(credentialResponse);
           if (credentialResponse.credential) {
             dispatch(googleAuth({ token: credentialResponse.credential }));
           }

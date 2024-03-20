@@ -4,6 +4,9 @@ import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import AppProviders from "./providers/AppProviders";
+import { disableReactDevTools } from "@fvilers/disable-react-devtools";
+
+disableReactDevTools();
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
