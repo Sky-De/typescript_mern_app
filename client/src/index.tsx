@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import AppProviders from "./providers/AppProviders";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 
+// For security purposes react dev tool is disable
 disableReactDevTools();
 
 const root = ReactDOM.createRoot(

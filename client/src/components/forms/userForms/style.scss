@@ -3,7 +3,7 @@
 .authForm {
   max-height: 100vh;
   @include respond-to(lg) {
-    padding: 0.5rem 3rem;
+    padding: 1.25rem 3rem;
   }
   overflow: scroll;
   &__icon {
@@ -52,6 +52,9 @@
 
 .divider {
   margin: 0.5rem 0;
+  @include respond-to(lg) {
+    margin: 0;
+  }
   width: 100%;
   // border: 1px solid red;
   display: flex;
