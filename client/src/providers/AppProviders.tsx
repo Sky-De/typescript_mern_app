@@ -8,7 +8,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 type Props = {
   children: ReactNode;
 };
-
+// FIX--- replace with .env
 export const AppProviders: FC<Props> = ({ children }: Props) => {
   return (
     <GoogleOAuthProvider clientId="118589316191-sibtenu9196le9sq2vareqdj21vjdsdo.apps.googleusercontent.com">

@@ -13,10 +13,15 @@ class APIError extends Error {
     this.stack = stackTrace;
   }
 }
-// const API = axios.create({ baseURL: "http://localhost:2323/api/v1/" });
+// FIX--replace with .env and add development and production
+// this is new deploy on back4app
 const API = axios.create({
-  baseURL: "https://puce-worried-barnacle.cyclic.app/api/v1/",
+  baseURL: "https://booksharebackend-a16zj2wa.b4a.run/api/v1/",
 });
+// const API = axios.create({ baseURL: "http://localhost:2323/api/v1/" });
+// const API = axios.create({
+//   baseURL: "https://puce-worried-barnacle.cyclic.app/api/v1/",
+// });
 
 API.interceptors.request.use((config) => {
   //same thing server side: app.use(cors({ origin:true, credentials: true}));
