@@ -1,5 +1,5 @@
 FROM node:18
-WORKDIR /app
+WORKDIR /server
 COPY package*.jsom ./
 RUN npm install
 COPY . .
